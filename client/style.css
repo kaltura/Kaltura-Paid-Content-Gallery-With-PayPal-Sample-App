@@ -1,0 +1,144 @@
+@CHARSET "ISO-8859-1";
+
+body, html {
+	margin: 0;
+	padding: 0;
+	text-align: justify;
+ 	font-size: 14px;
+ 	line-height: 24px;
+ 	font-family: "Trebuchet MS", Helvetica, Sans-Serif;
+ 	height: 97%;
+}
+
+div.notep {
+	font-size: 14px; background: #cccfff url(note_icons.png) no-repeat left center; padding-left: 80px; min-height: 56px; display: block; padding-top: 5px; margin-top: 15px; margin-bottom: 15px;
+}
+
+div.pagerDiv {
+	padding-bottom: 15px;
+}
+
+div.searchDiv {
+	padding-bottom: 15px;
+}
+
+div.capsule {
+	width:800px;
+	margin: 0 auto;
+}
+
+#wrapper {
+	width:800px;
+	margin: 0 auto;
+}
+
+div.clear {
+	clear:both;
+	padding-top: 3px;
+}
+
+div.float1 {
+	float:left;
+}
+
+div.space {
+	float: left;
+	padding: 3px;
+}
+div.entriesDiv {
+	width: 380px;
+	float: left;
+	display: block;
+}
+
+#playerDivContainer {
+	float: left;
+	width: 400px;
+	height: 300px;
+}
+#playerDiv {
+	margin-top: 1px;
+}
+
+.italicbold {
+	font-weight: bold;
+	font-style: italic;
+}
+
+#purchaseWindow {
+	display: none;
+	position: absolute;
+	z-index: 9999;
+	background-color: #ededed;
+	border: 2px solid black;
+	top: 0px;
+	left: 0px;
+	padding: 10px;
+}
+
+#buyNowButton {
+	background-color: #EDEDED;
+	border: 2px solid;
+	border-radius: 10px;
+	border-color: gold;
+}
+
+
+#buyCategoryButton {
+	background-color: #EDEDED;
+	border: 2px solid;
+	border-radius: 10px;
+	border-color: gold;
+}
+
+#categoryList {
+	height: 59px;
+	margin-bottom: 15px;
+}
+
+div.categories {
+	float: left;
+	margin-right: 10px;
+	border: 1px solid black;
+	width: 90px;
+	height: 54px;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+div.category {
+	line-height: 0px;
+	height: 34px;
+}
+
+div.categoryName {
+	text-align: center;
+	white-space:nowrap;
+    overflow:hidden;
+}
+
+div.clearCategory {
+	clear: both;
+}
+
+#leftTriangle {
+	margin-top: 9px;
+	margin-right: 10px;
+	float: left;
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1);
+    -ms-filter: fliph; /*IE*/
+    filter: fliph; /*IE*/
+}
+
+#rightTriangle {
+	float: left;
+	margin-top: 9px;
+}
+
+#entriesDiv {
+	width: 380px;
+	height: 312px;
+}

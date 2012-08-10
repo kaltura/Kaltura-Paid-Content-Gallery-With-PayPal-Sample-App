@@ -1,0 +1,100 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="metadata">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element id="md_74ADBA44-370D-094E-2F0E-C3E04C1467DC" name="Paid" minOccurs="0" maxOccurs="1">
+          <xsd:annotation>
+            <xsd:documentation></xsd:documentation>
+            <xsd:appinfo>
+              <label>Paid</label>
+              <key>Paid</key>
+              <searchable>true</searchable>
+              <timeControl>false</timeControl>
+              <description></description>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="listType">
+              <xsd:enumeration value="true"/>
+              <xsd:enumeration value="false"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element id="md_97464E5C-AEF1-3B85-C8EB-C3E083A297F0" name="Price" minOccurs="0" maxOccurs="1" type="textType">
+          <xsd:annotation>
+            <xsd:documentation></xsd:documentation>
+            <xsd:appinfo>
+              <label>Price</label>
+              <key>Price</key>
+              <searchable>true</searchable>
+              <timeControl>false</timeControl>
+              <description></description>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element id="md_0169A99E-836D-A977-02A0-C3E13B42B99A" name="TaxPercent" minOccurs="0" maxOccurs="1" type="textType">
+          <xsd:annotation>
+            <xsd:documentation></xsd:documentation>
+            <xsd:appinfo>
+              <label>TaxPercent</label>
+              <key>TaxPercent</key>
+              <searchable>true</searchable>
+              <timeControl>false</timeControl>
+              <description>Value must be in units of percent (0-100)</description>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element id="md_222F7F7C-8652-FD3F-AC18-C3E7813ADB9D" name="CurrencyCode" minOccurs="0" maxOccurs="1">
+          <xsd:annotation>
+            <xsd:documentation></xsd:documentation>
+            <xsd:appinfo>
+              <label>CurrencyCode</label>
+              <key>CurrencyCode</key>
+              <searchable>true</searchable>
+              <timeControl>false</timeControl>
+              <description>List of PayPal accepted currencies</description>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="listType">
+              <xsd:enumeration value="USD"/>
+              <xsd:enumeration value="AUD"/>
+              <xsd:enumeration value="CAD"/>
+              <xsd:enumeration value="CZK"/>
+              <xsd:enumeration value="DKK"/>
+              <xsd:enumeration value="EUR"/>
+              <xsd:enumeration value="HKD"/>
+              <xsd:enumeration value="HUF"/>
+              <xsd:enumeration value="JPY"/>
+              <xsd:enumeration value="NOK"/>
+              <xsd:enumeration value="NZD"/>
+              <xsd:enumeration value="PLN"/>
+              <xsd:enumeration value="GBP"/>
+              <xsd:enumeration value="SGD"/>
+              <xsd:enumeration value="SEK"/>
+              <xsd:enumeration value="CHF"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="textType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string"/>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="dateType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:long"/>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="objectType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string"/>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="listType">
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+</xsd:schema>

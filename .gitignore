@@ -5,4 +5,4 @@ node_modules
 .buildpath
 sample/
 #These are ignored to protect login information
-server/kalturaConfig.php
+#server/kalturaConfig.php

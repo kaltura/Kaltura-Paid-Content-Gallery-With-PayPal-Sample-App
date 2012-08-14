@@ -94,7 +94,18 @@ require_once('server/kalturaConfig.php');
 		//Verifies whether or not a video has been paid for
 		var verifySyncRes = null;
 		function verify(entryId) {
-			verifySyncRes = null;
+			verifySyncRes = false;
+			$.ajax({
+				type: "POST",
+				async: false,
+				url: "server/verifyPurchase.php",
+				data: {id: entryId}
+			}).done(function(msg) {
+				if(msg == 'true')
+					verifySyncRes = true;
+			});
+			//This method verifies 
+			/*
 			pptransact.verify({
 				userId:'<?php echo $USER_ID; ?>',
 				itemId:entryId,
@@ -107,6 +118,7 @@ require_once('server/kalturaConfig.php');
 					verifySyncRes = false;
 				}
 			});
+			*/
 			return verifySyncRes;
 		}
 		
@@ -241,8 +253,15 @@ require_once('server/kalturaConfig.php');
 					if(!bool) {
 						bool = verify(id);
 						$('#purchaseWindow').hide();
-						if(bool)
-							loadVideo(pptransact.getVerifyData().ks, '<?php echo PLAYER_UICONF_ID; ?>', id);
+						if(bool) {
+							$.ajax({
+								type: "POST",
+								url: "server/kaltura.php",
+								data: {entryId: id}
+							}).done(function(msg) {
+								loadVideo(msg, '<?php echo PLAYER_UICONF_ID; ?>', id);
+							});
+						}
 						else
 							loadVideo('','<?php echo BUY_BUTTON_PLAYER_UICONF_ID; ?>', id);
 					}

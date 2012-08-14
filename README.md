@@ -55,6 +55,10 @@ has an individual price profile, the customer can buy that video regardless of a
 video itself, the customer can only buy the video as part of a subscription. To offer the video as a standalone purchase, you must set the individual
 pricing for it.
 
+How purchases are stored
+------------------------
+PayPal's original HTML5 library uses local storage to keep a record of all the digital goods that the customer has purchased. Unfortunately, if the customer clears their browser data (including their HTML5 local storage) then any record of the purchase is erased. We have bypassed this verification system and instead used user custom metadata. When a customer makes a purchase, their user ID and purchases are stored with Kaltura so the information cannot be lost.
+
 Files
 -----
 

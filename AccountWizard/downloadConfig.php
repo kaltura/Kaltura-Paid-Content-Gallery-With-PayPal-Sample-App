@@ -18,7 +18,7 @@ header("Set-Cookie: fileDownload=true; path=/");
 echo "<?php \n";
 //Retrieves the entry metadata profile
 $filter = new KalturaMetadataProfileFilter();
-$filter->metadataObjectTypeEqual = KalturaMetadataObjectType::ENTRY;
+$filter->metadataObjectTypeEqual = 1;
 $filter->nameEqual = 'PayPal (Entries)';
 $pager = new KalturaFilterPager();
 $pager->pageSize = 1;
@@ -26,12 +26,20 @@ $pager->pageIndex = 1;
 $entryMetadata = $client->metadataProfile->listAction($filter, $pager)->objects[0]->id;
 //Retrieves the category metadata profile
 $filter = new KalturaMetadataProfileFilter();
-$filter->metadataObjectTypeEqual = KalturaMetadataObjectType::CATEGORY;
+$filter->metadataObjectTypeEqual = 2;
 $filter->nameEqual = 'PayPal (Categories)';
 $pager = new KalturaFilterPager();
 $pager->pageSize = 1;
 $pager->pageIndex = 1;
 $categoryMetadata = $client->metadataProfile->listAction($filter, $pager)->objects[0]->id;
+//Retrieves the user metadata profile
+$filter = new KalturaMetadataProfileFilter();
+$filter->metadataObjectTypeEqual = 3;
+$filter->nameEqual = 'PayPal (Users)';
+$pager = new KalturaFilterPager();
+$pager->pageSize = 1;
+$pager->pageIndex = 1;
+$userMetadata = $client->metadataProfile->listAction($filter, $pager)->objects[0]->id;
 ?>
 // To get started with Kaltura, you need an acccount.
 // Get a free trial at: http://corp.kaltura.com
@@ -44,6 +52,7 @@ define("PLAYER_UICONF_ID", <?php echo $_REQUEST['default']; ?>);
 define("BUY_BUTTON_PLAYER_UICONF_ID", <?php echo $_REQUEST['paid']; ?>);
 define("PAYPAL_METADATA_PROFILE_ID", <?php echo $entryMetadata; ?>);
 define("PAYPAL_CATEGORY_METADATA_PROFILE_ID", <?php echo $categoryMetadata; ?>);
+define("PAYPAL_USER_METADATA_PROFILE_ID", <?php echo $userMetadata; ?>);
 //Generates a USER ID based on the machine name and IP address.
 function getRealIpAddr() {
 	if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet

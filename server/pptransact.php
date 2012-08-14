@@ -115,7 +115,7 @@ class pptransact{
     
     //Verifies whether a video or channel was purchased
     public function verifyPurchase($userId, $itemId, $transactions) {
-        $transactionId = null;
+    	$transactionId = null;
         $transactions = json_decode(stripslashes($transactions));
         for ($i = 0; $i < count($transactions); $i++) {
 	        if ($transactions[$i]->itemId == $itemId) {

@@ -63,35 +63,46 @@ require_once('server/kalturaConfig.php');
 		pptransact.init('php',false);
 
 		//Initializes the PayPal express checkout billing system
-		function bill(entryId){
+		function bill(entryId) {
 			pptransact.bill({
 				userId:'<?php echo $USER_ID; ?>',
 				itemId:entryId,
 				itemQty:'1',
-				successCallback: function(ret){
+				successCallback: function(ret) {
+					console.log(ret);
 					//bill success
 					$('#purchaseWindow').hide();
 					checkAccess(currentEntry, ret);
-
+					savePurchase(ret);
 				},
-				failCallback: function(){
+				failCallback: function() {
 					//bill canceled
 				}
 			});
 		}
 
+		function savePurchase(ret) {
+			$.ajax({
+				type: "POST",
+				url: "server/savePurchase.php",
+				data: {id: ret}
+			}).done(function(msg) {
+				
+			});
+		}
+
 		//Verifies whether or not a video has been paid for
 		var verifySyncRes = null;
-		function verify(entryId){
+		function verify(entryId) {
 			verifySyncRes = null;
 			pptransact.verify({
 				userId:'<?php echo $USER_ID; ?>',
 				itemId:entryId,
-				successCallback: function(){
+				successCallback: function() {
 					//verify success
 					verifySyncRes = true;
 				},
-				failCallback: function(){
+				failCallback: function() {
 					//verify cancelled
 					verifySyncRes = false;
 				}
@@ -210,8 +221,7 @@ require_once('server/kalturaConfig.php');
 					// This entry is free to watch
 					$('#purchaseWindow').hide();
 					loadVideo('', '<?php echo PLAYER_UICONF_ID; ?>', id);
-				}
-				else {
+				} else {
 					var bool = false;
 					for(var i = 0; i < categories.length; ++i) {
 						if(categories[i] != "")

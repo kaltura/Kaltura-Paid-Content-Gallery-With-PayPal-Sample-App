@@ -28,8 +28,8 @@
 // ===================================================================================================
 
 /**
- * @package External
- * @subpackage Kaltura
+ * @package Kaltura
+ * @subpackage Client
  */
 class MultiRequestSubResult
 {
@@ -50,8 +50,8 @@ class MultiRequestSubResult
 }
 
 /**
- * @package External
- * @subpackage Kaltura
+ * @package Kaltura
+ * @subpackage Client
  */
 class KalturaNull 
 {
@@ -79,8 +79,8 @@ class KalturaNull
 }
 
 /**
- * @package External
- * @subpackage Kaltura
+ * @package Kaltura
+ * @subpackage Client
  */
 class KalturaClientBase 
 {
@@ -717,8 +717,8 @@ class KalturaClientBase
 }
 
 /**
- * @package External
- * @subpackage Kaltura
+ * @package Kaltura
+ * @subpackage Client
  */
 interface IKalturaClientPlugin
 {
@@ -739,8 +739,8 @@ interface IKalturaClientPlugin
 }
 
 /**
- * @package External
- * @subpackage Kaltura
+ * @package Kaltura
+ * @subpackage Client
  */
 abstract class KalturaClientPlugin implements IKalturaClientPlugin
 {
@@ -751,8 +751,8 @@ abstract class KalturaClientPlugin implements IKalturaClientPlugin
 }
 
 /**
- * @package External
- * @subpackage Kaltura
+ * @package Kaltura
+ * @subpackage Client
  */
 class KalturaServiceActionCall
 {
@@ -851,8 +851,8 @@ class KalturaServiceActionCall
 /**
  * Abstract base class for all client services
  *  
- * @package External
- * @subpackage Kaltura
+ * @package Kaltura
+ * @subpackage Client
  */
 abstract class KalturaServiceBase
 {
@@ -883,8 +883,8 @@ abstract class KalturaServiceBase
 /**
  * Abstract base class for all client objects
  * 
- * @package External
- * @subpackage Kaltura
+ * @package Kaltura
+ * @subpackage Client
  */
 abstract class KalturaObjectBase
 {
@@ -916,8 +916,8 @@ abstract class KalturaObjectBase
 }
 
 /**
- * @package External
- * @subpackage Kaltura
+ * @package Kaltura
+ * @subpackage Client
  */
 class KalturaException extends Exception 
 {
@@ -929,8 +929,8 @@ class KalturaException extends Exception
 }
 
 /**
- * @package External
- * @subpackage Kaltura
+ * @package Kaltura
+ * @subpackage Client
  */
 class KalturaClientException extends Exception 
 {
@@ -945,8 +945,8 @@ class KalturaClientException extends Exception
 }
 
 /**
- * @package External
- * @subpackage Kaltura
+ * @package Kaltura
+ * @subpackage Client
  */
 class KalturaConfiguration
 {
@@ -1006,8 +1006,8 @@ class KalturaConfiguration
 /**
  * Implement to get Kaltura Client logs
  * 
- * @package External
- * @subpackage Kaltura
+ * @package Kaltura
+ * @subpackage Client
  */
 interface IKalturaLogger 
 {

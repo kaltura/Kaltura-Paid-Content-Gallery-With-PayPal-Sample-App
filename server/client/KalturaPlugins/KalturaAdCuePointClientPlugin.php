@@ -27,11 +27,19 @@
 // @ignore
 // ===================================================================================================
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
 require_once(dirname(__FILE__) . "/../KalturaEnums.php");
 require_once(dirname(__FILE__) . "/../KalturaTypes.php");
 require_once(dirname(__FILE__) . "/KalturaCuePointClientPlugin.php");
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAdCuePointOrderBy
 {
 	const END_TIME_ASC = "+endTime";
@@ -48,6 +56,10 @@ class KalturaAdCuePointOrderBy
 	const PARTNER_SORT_VALUE_DESC = "-partnerSortValue";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAdProtocolType
 {
 	const CUSTOM = "0";
@@ -56,12 +68,20 @@ class KalturaAdProtocolType
 	const VPAID = "3";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAdType
 {
 	const VIDEO = "1";
 	const OVERLAY = "2";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAdCuePoint extends KalturaCuePoint
 {
 	/**
@@ -112,6 +132,10 @@ class KalturaAdCuePoint extends KalturaCuePoint
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaAdCuePointBaseFilter extends KalturaCuePointFilter
 {
 	/**
@@ -180,11 +204,19 @@ abstract class KalturaAdCuePointBaseFilter extends KalturaCuePointFilter
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAdCuePointFilter extends KalturaAdCuePointBaseFilter
 {
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAdCuePointClientPlugin extends KalturaClientPlugin
 {
 	protected function __construct(KalturaClient $client)

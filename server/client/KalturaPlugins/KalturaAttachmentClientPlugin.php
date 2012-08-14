@@ -27,10 +27,18 @@
 // @ignore
 // ===================================================================================================
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
 require_once(dirname(__FILE__) . "/../KalturaEnums.php");
 require_once(dirname(__FILE__) . "/../KalturaTypes.php");
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAttachmentAssetStatus
 {
 	const ERROR = -1;
@@ -41,6 +49,10 @@ class KalturaAttachmentAssetStatus
 	const EXPORTING = 9;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAttachmentAssetOrderBy
 {
 	const SIZE_ASC = "+size";
@@ -53,6 +65,10 @@ class KalturaAttachmentAssetOrderBy
 	const DELETED_AT_DESC = "-deletedAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAttachmentType
 {
 	const TEXT = "1";
@@ -60,27 +76,10 @@ class KalturaAttachmentType
 	const DOCUMENT = "3";
 }
 
-class KalturaAttachmentAssetListResponse extends KalturaObjectBase
-{
-	/**
-	 * 
-	 *
-	 * @var array of KalturaAttachmentAsset
-	 * @readonly
-	 */
-	public $objects;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $totalCount = null;
-
-
-}
-
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAttachmentAsset extends KalturaAsset
 {
 	/**
@@ -119,6 +118,35 @@ class KalturaAttachmentAsset extends KalturaAsset
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAttachmentAssetListResponse extends KalturaObjectBase
+{
+	/**
+	 * 
+	 *
+	 * @var array of KalturaAttachmentAsset
+	 * @readonly
+	 */
+	public $objects;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $totalCount = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaAttachmentAssetBaseFilter extends KalturaAssetFilter
 {
 	/**
@@ -159,12 +187,20 @@ abstract class KalturaAttachmentAssetBaseFilter extends KalturaAssetFilter
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAttachmentAssetFilter extends KalturaAttachmentAssetBaseFilter
 {
 
 }
 
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAttachmentAssetService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -292,6 +328,10 @@ class KalturaAttachmentAssetService extends KalturaServiceBase
 		return $resultObject;
 	}
 }
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAttachmentClientPlugin extends KalturaClientPlugin
 {
 	/**

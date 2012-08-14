@@ -34,63 +34,40 @@
 require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
 require_once(dirname(__FILE__) . "/../KalturaEnums.php");
 require_once(dirname(__FILE__) . "/../KalturaTypes.php");
-require_once(dirname(__FILE__) . "/KalturaCuePointClientPlugin.php");
 
 /**
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCodeCuePointOrderBy
-{
-	const END_TIME_ASC = "+endTime";
-	const END_TIME_DESC = "-endTime";
-	const DURATION_ASC = "+duration";
-	const DURATION_DESC = "-duration";
-	const CREATED_AT_ASC = "+createdAt";
-	const CREATED_AT_DESC = "-createdAt";
-	const UPDATED_AT_ASC = "+updatedAt";
-	const UPDATED_AT_DESC = "-updatedAt";
-	const START_TIME_ASC = "+startTime";
-	const START_TIME_DESC = "-startTime";
-	const PARTNER_SORT_VALUE_ASC = "+partnerSortValue";
-	const PARTNER_SORT_VALUE_DESC = "-partnerSortValue";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCodeCuePoint extends KalturaCuePoint
+class KalturaFileSyncImportJobData extends KalturaJobData
 {
 	/**
 	 * 
 	 *
 	 * @var string
 	 */
-	public $code = null;
+	public $sourceUrl = null;
 
 	/**
 	 * 
 	 *
 	 * @var string
 	 */
-	public $description = null;
+	public $filesyncId = null;
 
 	/**
 	 * 
 	 *
-	 * @var int
+	 * @var string
 	 */
-	public $endTime = null;
+	public $tmpFilePath = null;
 
 	/**
-	 * Duration in milliseconds
-	 * 	 
+	 * 
 	 *
-	 * @var int
-	 * @readonly
+	 * @var string
 	 */
-	public $duration = null;
+	public $destFilePath = null;
 
 
 }
@@ -99,109 +76,7 @@ class KalturaCodeCuePoint extends KalturaCuePoint
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaCodeCuePointBaseFilter extends KalturaCuePointFilter
-{
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $codeLike = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $codeMultiLikeOr = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $codeMultiLikeAnd = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $codeEqual = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $codeIn = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $descriptionLike = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $descriptionMultiLikeOr = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $descriptionMultiLikeAnd = null;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	public $endTimeGreaterThanOrEqual = null;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	public $endTimeLessThanOrEqual = null;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	public $durationGreaterThanOrEqual = null;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	public $durationLessThanOrEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCodeCuePointFilter extends KalturaCodeCuePointBaseFilter
-{
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCodeCuePointClientPlugin extends KalturaClientPlugin
+class KalturaMultiCentersClientPlugin extends KalturaClientPlugin
 {
 	protected function __construct(KalturaClient $client)
 	{
@@ -209,11 +84,11 @@ class KalturaCodeCuePointClientPlugin extends KalturaClientPlugin
 	}
 
 	/**
-	 * @return KalturaCodeCuePointClientPlugin
+	 * @return KalturaMultiCentersClientPlugin
 	 */
 	public static function get(KalturaClient $client)
 	{
-		return new KalturaCodeCuePointClientPlugin($client);
+		return new KalturaMultiCentersClientPlugin($client);
 	}
 
 	/**
@@ -231,7 +106,7 @@ class KalturaCodeCuePointClientPlugin extends KalturaClientPlugin
 	 */
 	public function getName()
 	{
-		return 'codeCuePoint';
+		return 'multiCenters';
 	}
 }
 

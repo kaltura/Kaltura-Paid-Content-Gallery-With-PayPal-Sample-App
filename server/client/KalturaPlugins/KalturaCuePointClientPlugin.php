@@ -27,16 +27,28 @@
 // @ignore
 // ===================================================================================================
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
 require_once(dirname(__FILE__) . "/../KalturaEnums.php");
 require_once(dirname(__FILE__) . "/../KalturaTypes.php");
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCuePointStatus
 {
 	const READY = 1;
 	const DELETED = 2;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCuePointOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
@@ -49,6 +61,10 @@ class KalturaCuePointOrderBy
 	const PARTNER_SORT_VALUE_DESC = "-partnerSortValue";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCuePointType
 {
 	const ANNOTATION = "annotation.Annotation";
@@ -56,6 +72,10 @@ class KalturaCuePointType
 	const CODE = "codeCuePoint.Code";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaCuePoint extends KalturaObjectBase
 {
 	/**
@@ -175,6 +195,10 @@ abstract class KalturaCuePoint extends KalturaObjectBase
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCuePointListResponse extends KalturaObjectBase
 {
 	/**
@@ -196,6 +220,10 @@ class KalturaCuePointListResponse extends KalturaObjectBase
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaCuePointBaseFilter extends KalturaFilter
 {
 	/**
@@ -383,12 +411,20 @@ abstract class KalturaCuePointBaseFilter extends KalturaFilter
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCuePointFilter extends KalturaCuePointBaseFilter
 {
 
 }
 
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCuePointService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -505,6 +541,10 @@ class KalturaCuePointService extends KalturaServiceBase
 		return $resultObject;
 	}
 }
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCuePointClientPlugin extends KalturaClientPlugin
 {
 	/**

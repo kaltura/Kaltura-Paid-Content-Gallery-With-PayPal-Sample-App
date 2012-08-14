@@ -9,7 +9,7 @@ $config = new KalturaConfiguration(PARTNER_ID);
 $config->serviceUrl = 'http://www.kaltura.com/';
 $client = new KalturaClient($config);
 global $USER_ID;
-$ks = $client->generateSession(ADMIN_SECRET, $USER_ID, KalturaSessionType::ADMIN, PARTNER_ID);
+$ks = $client->session->start(ADMIN_SECRET, $USER_ID, KalturaSessionType::ADMIN, PARTNER_ID);
 $client->setKs($ks);
 
 //Filters the entries so that they are ordered by descending creation order

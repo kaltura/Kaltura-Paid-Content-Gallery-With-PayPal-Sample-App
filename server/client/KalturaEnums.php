@@ -27,14 +27,26 @@
 // @ignore
 // ===================================================================================================
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 require_once("KalturaClientBase.php");
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAppearInListType
 {
 	const PARTNER_ONLY = 1;
 	const CATEGORY_MEMBERS_ONLY = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetParamsOrigin
 {
 	const CONVERT = 0;
@@ -42,6 +54,10 @@ class KalturaAssetParamsOrigin
 	const CONVERT_WHEN_MISSING = 2;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetStatus
 {
 	const ERROR = -1;
@@ -52,6 +68,10 @@ class KalturaAssetStatus
 	const EXPORTING = 9;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBatchJobErrorTypes
 {
 	const APP = 0;
@@ -62,6 +82,10 @@ class KalturaBatchJobErrorTypes
 	const KALTURA_CLIENT = 5;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBatchJobStatus
 {
 	const PENDING = 0;
@@ -78,12 +102,20 @@ class KalturaBatchJobStatus
 	const DONT_PROCESS = 11;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBitRateMode
 {
 	const CBR = 1;
 	const VBR = 2;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCategoryEntryStatus
 {
 	const PENDING = 1;
@@ -92,6 +124,10 @@ class KalturaCategoryEntryStatus
 	const REJECTED = 4;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCategoryStatus
 {
 	const UPDATING = 1;
@@ -100,6 +136,10 @@ class KalturaCategoryStatus
 	const PURGED = 4;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCategoryUserPermissionLevel
 {
 	const MANAGER = 0;
@@ -108,6 +148,10 @@ class KalturaCategoryUserPermissionLevel
 	const MEMBER = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCategoryUserStatus
 {
 	const ACTIVE = 1;
@@ -115,18 +159,30 @@ class KalturaCategoryUserStatus
 	const NOT_ACTIVE = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCommercialUseType
 {
 	const COMMERCIAL_USE = 1;
 	const NON_COMMERCIAL_USE = 0;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaContributionPolicyType
 {
 	const ALL = 1;
 	const MEMBERS_WITH_CONTRIBUTION_PERMISSION = 2;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaControlPanelCommandStatus
 {
 	const PENDING = 1;
@@ -135,6 +191,10 @@ class KalturaControlPanelCommandStatus
 	const FAILED = 4;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaControlPanelCommandTargetType
 {
 	const DATA_CENTER = 1;
@@ -144,6 +204,10 @@ class KalturaControlPanelCommandTargetType
 	const BATCH = 5;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaControlPanelCommandType
 {
 	const STOP = 1;
@@ -152,30 +216,50 @@ class KalturaControlPanelCommandType
 	const KILL = 4;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCountryRestrictionType
 {
 	const RESTRICT_COUNTRY_LIST = 0;
 	const ALLOW_COUNTRY_LIST = 1;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaDirectoryRestrictionType
 {
 	const DONT_DISPLAY = 0;
 	const DISPLAY_WITH_LINK = 1;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEditorType
 {
 	const SIMPLE = 1;
 	const ADVANCED = 2;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEmailIngestionProfileStatus
 {
 	const INACTIVE = 0;
 	const ACTIVE = 1;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEntryModerationStatus
 {
 	const PENDING_MODERATION = 1;
@@ -185,6 +269,10 @@ class KalturaEntryModerationStatus
 	const AUTO_APPROVED = 6;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaFeatureStatusType
 {
 	const LOCK_CATEGORY = 1;
@@ -194,6 +282,10 @@ class KalturaFeatureStatusType
 	const CATEGORY_USER = 5;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaFlavorAssetStatus
 {
 	const CONVERTING = 1;
@@ -209,6 +301,10 @@ class KalturaFlavorAssetStatus
 	const EXPORTING = 9;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaFlavorReadyBehaviorType
 {
 	const NO_IMPACT = 0;
@@ -217,6 +313,10 @@ class KalturaFlavorReadyBehaviorType
 	const INHERIT_FLAVOR_PARAMS = 0;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaGender
 {
 	const UNKNOWN = 0;
@@ -224,18 +324,30 @@ class KalturaGender
 	const FEMALE = 2;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaInheritanceType
 {
 	const INHERIT = 1;
 	const MANUAL = 2;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaIpAddressRestrictionType
 {
 	const RESTRICT_LIST = 0;
 	const ALLOW_LIST = 1;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaLicenseType
 {
 	const UNKNOWN = -1;
@@ -257,6 +369,22 @@ class KalturaLicenseType
 	const MOZILLA = 15;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMailJobStatus
+{
+	const PENDING = 1;
+	const SENT = 2;
+	const ERROR = 3;
+	const QUEUED = 4;
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMediaType
 {
 	const VIDEO = 1;
@@ -268,12 +396,20 @@ class KalturaMediaType
 	const LIVE_STREAM_QUICKTIME = 204;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaModerationFlagStatus
 {
 	const PENDING = 1;
 	const MODERATED = 2;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaModerationFlagType
 {
 	const SEXUAL_CONTENT = 1;
@@ -284,12 +420,47 @@ class KalturaModerationFlagType
 	const TERMS_OF_USE_VIOLATION = 6;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaModerationObjectType
 {
 	const ENTRY = 2;
 	const USER = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaNotificationObjectType
+{
+	const ENTRY = 1;
+	const KSHOW = 2;
+	const USER = 3;
+	const BATCH_JOB = 4;
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaNotificationStatus
+{
+	const PENDING = 1;
+	const SENT = 2;
+	const ERROR = 3;
+	const SHOULD_RESEND = 4;
+	const ERROR_RESENDING = 5;
+	const SENT_SYNCH = 6;
+	const QUEUED = 7;
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaNotificationType
 {
 	const ENTRY_ADD = 1;
@@ -303,15 +474,21 @@ class KalturaNotificationType
 	const USER_BANNED = 26;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaNullableBoolean
 {
 	const NULL_VALUE = -1;
 	const FALSE_VALUE = 0;
 	const TRUE_VALUE = 1;
-	const TRUE_VALUE_STRING = true;
-	const FALSE_VALUE_STRING = false;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPartnerGroupType
 {
 	const PUBLISHER = 1;
@@ -320,6 +497,10 @@ class KalturaPartnerGroupType
 	const TEMPLATE = 4;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPartnerStatus
 {
 	const ACTIVE = 1;
@@ -327,6 +508,10 @@ class KalturaPartnerStatus
 	const FULL_BLOCK = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPartnerType
 {
 	const KMC = 1;
@@ -342,6 +527,10 @@ class KalturaPartnerType
 	const ADMIN_CONSOLE = 109;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPermissionStatus
 {
 	const ACTIVE = 1;
@@ -349,6 +538,10 @@ class KalturaPermissionStatus
 	const DELETED = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPermissionType
 {
 	const NORMAL = 1;
@@ -357,6 +550,10 @@ class KalturaPermissionType
 	const PARTNER_GROUP = 4;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPlaylistType
 {
 	const DYNAMIC = 10;
@@ -364,6 +561,10 @@ class KalturaPlaylistType
 	const EXTERNAL = 101;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPrivacyType
 {
 	const ALL = 1;
@@ -371,6 +572,10 @@ class KalturaPrivacyType
 	const MEMBERS_ONLY = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaReportType
 {
 	const TOP_CONTENT = 1;
@@ -390,14 +595,23 @@ class KalturaReportType
 	const USER_USAGE = 17;
 	const SPECIFIC_USER_USAGE = 18;
 	const PARTNER_USAGE = 201;
+	const VAR_USAGE = 19;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSearchOperatorType
 {
 	const SEARCH_AND = 1;
 	const SEARCH_OR = 2;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSearchProviderType
 {
 	const FLICKR = 3;
@@ -418,18 +632,30 @@ class KalturaSearchProviderType
 	const PARTNER_SPECIFIC = 100;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSessionType
 {
 	const USER = 0;
 	const ADMIN = 2;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSiteRestrictionType
 {
 	const RESTRICT_SITE_LIST = 0;
 	const ALLOW_SITE_LIST = 1;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaStatsEventType
 {
 	const WIDGET_LOADED = 1;
@@ -474,12 +700,20 @@ class KalturaStatsEventType
 	const POSTROLL_75 = 40;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaStatsFeatureType
 {
 	const NONE = 0;
 	const RELATED = 1;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaStatsKmcEventType
 {
 	const CONTENT_PAGE_VIEW = 1001;
@@ -548,12 +782,20 @@ class KalturaStatsKmcEventType
 	const REPORTS_AND_ANALYTICS_BANDWIDTH_USAGE_VIEW_YEARLY = 1087;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaStorageProfileDeliveryStatus
 {
 	const ACTIVE = 1;
 	const BLOCKED = 2;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaStorageProfileProtocol
 {
 	const KALTURA_DC = 0;
@@ -563,12 +805,20 @@ class KalturaStorageProfileProtocol
 	const S3 = 6;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaStorageProfileReadyBehavior
 {
 	const NO_IMPACT = 0;
 	const REQUIRED = 1;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaStorageProfileStatus
 {
 	const DISABLED = 1;
@@ -576,12 +826,20 @@ class KalturaStorageProfileStatus
 	const MANUAL = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSyndicationFeedStatus
 {
 	const DELETED = -1;
 	const ACTIVE = 1;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSyndicationFeedType
 {
 	const GOOGLE_VIDEO = 1;
@@ -592,6 +850,10 @@ class KalturaSyndicationFeedType
 	const KALTURA_XSLT = 6;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaThumbAssetStatus
 {
 	const CAPTURING = 1;
@@ -603,6 +865,10 @@ class KalturaThumbAssetStatus
 	const EXPORTING = 9;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaThumbCropType
 {
 	const RESIZE = 1;
@@ -612,12 +878,20 @@ class KalturaThumbCropType
 	const RESIZE_WITH_FORCE = 5;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUiConfCreationMode
 {
 	const WIZARD = 2;
 	const ADVANCED = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUiConfObjType
 {
 	const PLAYER = 1;
@@ -640,12 +914,20 @@ class KalturaUiConfObjType
 	const CLIPPER = 18;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUpdateMethodType
 {
 	const MANUAL = 0;
 	const AUTOMATIC = 1;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUploadErrorCode
 {
 	const NO_ERROR = 0;
@@ -653,6 +935,10 @@ class KalturaUploadErrorCode
 	const PARTIAL_UPLOAD = 2;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUploadTokenStatus
 {
 	const PENDING = 0;
@@ -663,12 +949,20 @@ class KalturaUploadTokenStatus
 	const DELETED = 5;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUserAgentRestrictionType
 {
 	const RESTRICT_LIST = 0;
 	const ALLOW_LIST = 1;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUserJoinPolicyType
 {
 	const AUTO_JOIN = 1;
@@ -676,6 +970,10 @@ class KalturaUserJoinPolicyType
 	const NOT_ALLOWED = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUserRoleStatus
 {
 	const ACTIVE = 1;
@@ -683,6 +981,10 @@ class KalturaUserRoleStatus
 	const DELETED = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUserStatus
 {
 	const BLOCKED = 0;
@@ -690,18 +992,30 @@ class KalturaUserStatus
 	const DELETED = 2;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaWidgetSecurityType
 {
 	const NONE = 1;
 	const TIMEHASH = 2;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAccessControlActionType
 {
 	const BLOCK = "1";
 	const PREVIEW = "2";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAccessControlContextType
 {
 	const PLAY = "1";
@@ -709,12 +1023,20 @@ class KalturaAccessControlContextType
 	const THUMBNAIL = "3";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAccessControlOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAccessControlProfileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
@@ -723,6 +1045,10 @@ class KalturaAccessControlProfileOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAdminUserOrderBy
 {
 	const ID_ASC = "+id";
@@ -731,6 +1057,10 @@ class KalturaAdminUserOrderBy
 	const CREATED_AT_DESC = "-createdAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaApiActionPermissionItemOrderBy
 {
 	const ID_ASC = "+id";
@@ -741,6 +1071,10 @@ class KalturaApiActionPermissionItemOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaApiParameterPermissionItemAction
 {
 	const READ = "read";
@@ -749,6 +1083,10 @@ class KalturaApiParameterPermissionItemAction
 	const USAGE = "all";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaApiParameterPermissionItemOrderBy
 {
 	const ID_ASC = "+id";
@@ -759,6 +1097,10 @@ class KalturaApiParameterPermissionItemOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetOrderBy
 {
 	const SIZE_ASC = "+size";
@@ -771,14 +1113,42 @@ class KalturaAssetOrderBy
 	const DELETED_AT_DESC = "-deletedAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetParamsOrderBy
 {
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAssetParamsOutputOrderBy
 {
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAssetType
+{
+	const FLAVOR = "1";
+	const THUMBNAIL = "2";
+	const DOCUMENT = "document.Document";
+	const SWF = "document.SWF";
+	const PDF = "document.PDF";
+	const IMAGE = "document.Image";
+	const CAPTION = "caption.Caption";
+	const ATTACHMENT = "attachment.Attachment";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAudioCodec
 {
 	const NONE = "";
@@ -793,6 +1163,10 @@ class KalturaAudioCodec
 	const COPY = "copy";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBaseEntryOrderBy
 {
 	const NAME_ASC = "+name";
@@ -819,6 +1193,10 @@ class KalturaBaseEntryOrderBy
 	const WEIGHT_DESC = "-weight";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBaseJobOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
@@ -833,6 +1211,10 @@ class KalturaBaseJobOrderBy
 	const LOCK_VERSION_DESC = "-lockVersion";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBaseSyndicationFeedOrderBy
 {
 	const PLAYLIST_ID_ASC = "+playlistId";
@@ -845,6 +1227,10 @@ class KalturaBaseSyndicationFeedOrderBy
 	const CREATED_AT_DESC = "-createdAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBatchJobOrderBy
 {
 	const STATUS_ASC = "+status";
@@ -875,6 +1261,10 @@ class KalturaBatchJobOrderBy
 	const LOCK_VERSION_DESC = "-lockVersion";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBatchJobType
 {
 	const CONVERT = "0";
@@ -919,8 +1309,13 @@ class KalturaBatchJobType
 	const DROP_FOLDER_WATCHER = "dropFolder.DropFolderWatcher";
 	const DROP_FOLDER_HANDLER = "dropFolder.DropFolderHandler";
 	const PARSE_CAPTION_ASSET = "captionSearch.parseCaptionAsset";
+	const EVENT_NOTIFICATION_HANDLER = "eventNotification.EventNotificationHandler";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBulkUploadAction
 {
 	const ADD = "1";
@@ -931,6 +1326,10 @@ class KalturaBulkUploadAction
 	const ADD_OR_UPDATE = "6";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBulkUploadObjectType
 {
 	const ENTRY = "1";
@@ -939,10 +1338,18 @@ class KalturaBulkUploadObjectType
 	const CATEGORY_USER = "4";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBulkUploadOrderBy
 {
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBulkUploadResultObjectType
 {
 	const ENTRY = "1";
@@ -951,6 +1358,10 @@ class KalturaBulkUploadResultObjectType
 	const CATEGORY_USER = "4";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBulkUploadResultStatus
 {
 	const ERROR = "1";
@@ -958,6 +1369,10 @@ class KalturaBulkUploadResultStatus
 	const IN_PROGRESS = "3";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaBulkUploadType
 {
 	const CSV = "bulkUploadCsv.CSV";
@@ -965,12 +1380,20 @@ class KalturaBulkUploadType
 	const DROP_FOLDER_XML = "dropFolderXmlBulkUpload.DROP_FOLDER_XML";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCategoryEntryOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCategoryOrderBy
 {
 	const DEPTH_ASC = "+depth";
@@ -995,6 +1418,10 @@ class KalturaCategoryOrderBy
 	const DIRECT_SUB_CATEGORIES_COUNT_DESC = "-directSubCategoriesCount";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCategoryUserOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
@@ -1003,6 +1430,10 @@ class KalturaCategoryUserOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaConditionType
 {
 	const AUTHENTICATED = "1";
@@ -1016,6 +1447,10 @@ class KalturaConditionType
 	const METADATA_FIELD_COMPARE = "metadata.FieldCompare";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaContainerFormat
 {
 	const FLV = "flv";
@@ -1040,6 +1475,10 @@ class KalturaContainerFormat
 	const JPG = "jpg";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaControlPanelCommandOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
@@ -1048,16 +1487,28 @@ class KalturaControlPanelCommandOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaConversionProfileAssetParamsOrderBy
 {
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaConversionProfileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaConversionProfileStatus
 {
 	const DISABLED = "1";
@@ -1065,6 +1516,10 @@ class KalturaConversionProfileStatus
 	const DELETED = "3";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaDataEntryOrderBy
 {
 	const NAME_ASC = "+name";
@@ -1091,6 +1546,10 @@ class KalturaDataEntryOrderBy
 	const WEIGHT_DESC = "-weight";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaDurationType
 {
 	const NOT_AVAILABLE = "notavailable";
@@ -1099,10 +1558,18 @@ class KalturaDurationType
 	const LONG = "long";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaDynamicEnum
 {
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEntryReplacementStatus
 {
 	const NONE = "0";
@@ -1111,6 +1578,10 @@ class KalturaEntryReplacementStatus
 	const NOT_READY_AND_NOT_APPROVED = "3";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEntryStatus
 {
 	const ERROR_IMPORTING = "-2";
@@ -1127,6 +1598,10 @@ class KalturaEntryStatus
 	const SCAN_FAILURE = "virusScan.ScanFailure";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaEntryType
 {
 	const AUTOMATIC = "-1";
@@ -1138,6 +1613,10 @@ class KalturaEntryType
 	const DOCUMENT = "10";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaFileSyncObjectType
 {
 	const ENTRY = "1";
@@ -1152,8 +1631,13 @@ class KalturaFileSyncObjectType
 	const GENERIC_DISTRIBUTION_ACTION = "contentDistribution.GenericDistributionAction";
 	const ENTRY_DISTRIBUTION = "contentDistribution.EntryDistribution";
 	const DISTRIBUTION_PROFILE = "contentDistribution.DistributionProfile";
+	const EMAIL_NOTIFICATION_TEMPLATE = "emailNotification.EmailNotificationTemplate";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaFlavorAssetOrderBy
 {
 	const SIZE_ASC = "+size";
@@ -1166,14 +1650,26 @@ class KalturaFlavorAssetOrderBy
 	const DELETED_AT_DESC = "-deletedAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaFlavorParamsOrderBy
 {
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaFlavorParamsOutputOrderBy
 {
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaGenericSyndicationFeedOrderBy
 {
 	const PLAYLIST_ID_ASC = "+playlistId";
@@ -1186,6 +1682,10 @@ class KalturaGenericSyndicationFeedOrderBy
 	const CREATED_AT_DESC = "-createdAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaGenericXsltSyndicationFeedOrderBy
 {
 	const PLAYLIST_ID_ASC = "+playlistId";
@@ -1198,17 +1698,29 @@ class KalturaGenericXsltSyndicationFeedOrderBy
 	const CREATED_AT_DESC = "-createdAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaGeoCoderType
 {
 	const KALTURA = "1";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaGoogleSyndicationFeedAdultValues
 {
 	const YES = "Yes";
 	const NO = "No";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaGoogleVideoSyndicationFeedOrderBy
 {
 	const PLAYLIST_ID_ASC = "+playlistId";
@@ -1221,6 +1733,10 @@ class KalturaGoogleVideoSyndicationFeedOrderBy
 	const CREATED_AT_DESC = "-createdAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaITunesSyndicationFeedAdultValues
 {
 	const YES = "yes";
@@ -1228,6 +1744,10 @@ class KalturaITunesSyndicationFeedAdultValues
 	const CLEAN = "clean";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaITunesSyndicationFeedCategories
 {
 	const ARTS = "Arts";
@@ -1299,6 +1819,10 @@ class KalturaITunesSyndicationFeedCategories
 	const TV_FILM = "TV &amp; Film";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaITunesSyndicationFeedOrderBy
 {
 	const PLAYLIST_ID_ASC = "+playlistId";
@@ -1311,6 +1835,10 @@ class KalturaITunesSyndicationFeedOrderBy
 	const CREATED_AT_DESC = "-createdAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaLanguage
 {
 	const AB = "Abkhazian";
@@ -1458,6 +1986,10 @@ class KalturaLanguage
 	const ZU = "Zulu";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaLanguageCode
 {
 	const AB = "ab";
@@ -1605,6 +2137,10 @@ class KalturaLanguageCode
 	const ZU = "zu";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaLiveStreamAdminEntryOrderBy
 {
 	const MEDIA_TYPE_ASC = "+mediaType";
@@ -1641,6 +2177,10 @@ class KalturaLiveStreamAdminEntryOrderBy
 	const WEIGHT_DESC = "-weight";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaLiveStreamEntryOrderBy
 {
 	const MEDIA_TYPE_ASC = "+mediaType";
@@ -1677,6 +2217,10 @@ class KalturaLiveStreamEntryOrderBy
 	const WEIGHT_DESC = "-weight";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMailJobOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
@@ -1691,6 +2235,57 @@ class KalturaMailJobOrderBy
 	const LOCK_VERSION_DESC = "-lockVersion";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaMailType
+{
+	const MAIL_TYPE_KALTURA_NEWSLETTER = "10";
+	const MAIL_TYPE_ADDED_TO_FAVORITES = "11";
+	const MAIL_TYPE_ADDED_TO_CLIP_FAVORITES = "12";
+	const MAIL_TYPE_NEW_COMMENT_IN_PROFILE = "13";
+	const MAIL_TYPE_CLIP_ADDED_YOUR_KALTURA = "20";
+	const MAIL_TYPE_VIDEO_ADDED = "21";
+	const MAIL_TYPE_ROUGHCUT_CREATED = "22";
+	const MAIL_TYPE_ADDED_KALTURA_TO_YOUR_FAVORITES = "23";
+	const MAIL_TYPE_NEW_COMMENT_IN_KALTURA = "24";
+	const MAIL_TYPE_CLIP_ADDED = "30";
+	const MAIL_TYPE_VIDEO_CREATED = "31";
+	const MAIL_TYPE_ADDED_KALTURA_TO_HIS_FAVORITES = "32";
+	const MAIL_TYPE_NEW_COMMENT_IN_KALTURA_YOU_CONTRIBUTED = "33";
+	const MAIL_TYPE_CLIP_CONTRIBUTED = "40";
+	const MAIL_TYPE_ROUGHCUT_CREATED_SUBSCRIBED = "41";
+	const MAIL_TYPE_ADDED_KALTURA_TO_HIS_FAVORITES_SUBSCRIBED = "42";
+	const MAIL_TYPE_NEW_COMMENT_IN_KALTURA_YOU_SUBSCRIBED = "43";
+	const MAIL_TYPE_REGISTER_CONFIRM = "50";
+	const MAIL_TYPE_PASSWORD_RESET = "51";
+	const MAIL_TYPE_LOGIN_MAIL_RESET = "52";
+	const MAIL_TYPE_REGISTER_CONFIRM_VIDEO_SERVICE = "54";
+	const MAIL_TYPE_VIDEO_READY = "60";
+	const MAIL_TYPE_VIDEO_IS_READY = "62";
+	const MAIL_TYPE_BULK_DOWNLOAD_READY = "63";
+	const MAIL_TYPE_BULKUPLOAD_FINISHED = "64";
+	const MAIL_TYPE_BULKUPLOAD_FAILED = "65";
+	const MAIL_TYPE_BULKUPLOAD_ABORTED = "66";
+	const MAIL_TYPE_NOTIFY_ERR = "70";
+	const MAIL_TYPE_ACCOUNT_UPGRADE_CONFIRM = "80";
+	const MAIL_TYPE_VIDEO_SERVICE_NOTICE = "81";
+	const MAIL_TYPE_VIDEO_SERVICE_NOTICE_LIMIT_REACHED = "82";
+	const MAIL_TYPE_VIDEO_SERVICE_NOTICE_ACCOUNT_LOCKED = "83";
+	const MAIL_TYPE_VIDEO_SERVICE_NOTICE_ACCOUNT_DELETED = "84";
+	const MAIL_TYPE_VIDEO_SERVICE_NOTICE_UPGRADE_OFFER = "85";
+	const MAIL_TYPE_ACCOUNT_REACTIVE_CONFIRM = "86";
+	const MAIL_TYPE_SYSTEM_USER_RESET_PASSWORD = "110";
+	const MAIL_TYPE_SYSTEM_USER_RESET_PASSWORD_SUCCESS = "111";
+	const MAIL_TYPE_SYSTEM_USER_NEW_PASSWORD = "112";
+	const MAIL_TYPE_SYSTEM_USER_CREDENTIALS_SAVED = "113";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMediaEntryOrderBy
 {
 	const MEDIA_TYPE_ASC = "+mediaType";
@@ -1727,18 +2322,34 @@ class KalturaMediaEntryOrderBy
 	const WEIGHT_DESC = "-weight";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMediaFlavorParamsOrderBy
 {
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMediaFlavorParamsOutputOrderBy
 {
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMediaInfoOrderBy
 {
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMediaParserType
 {
 	const MEDIAINFO = "0";
@@ -1746,6 +2357,10 @@ class KalturaMediaParserType
 	const REMOTE_MEDIAINFO = "remoteMediaInfo.RemoteMediaInfo";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMixEntryOrderBy
 {
 	const PLAYS_ASC = "+plays";
@@ -1780,6 +2395,10 @@ class KalturaMixEntryOrderBy
 	const WEIGHT_DESC = "-weight";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaNotificationOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
@@ -1794,6 +2413,10 @@ class KalturaNotificationOrderBy
 	const LOCK_VERSION_DESC = "-lockVersion";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPartnerOrderBy
 {
 	const ID_ASC = "+id";
@@ -1812,6 +2435,10 @@ class KalturaPartnerOrderBy
 	const STATUS_DESC = "-status";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPermissionItemOrderBy
 {
 	const ID_ASC = "+id";
@@ -1822,12 +2449,20 @@ class KalturaPermissionItemOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPermissionItemType
 {
 	const API_ACTION_ITEM = "kApiActionPermissionItem";
 	const API_PARAMETER_ITEM = "kApiParameterPermissionItem";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPermissionOrderBy
 {
 	const ID_ASC = "+id";
@@ -1840,6 +2475,10 @@ class KalturaPermissionOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPlayableEntryOrderBy
 {
 	const PLAYS_ASC = "+plays";
@@ -1874,6 +2513,10 @@ class KalturaPlayableEntryOrderBy
 	const WEIGHT_DESC = "-weight";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaPlaylistOrderBy
 {
 	const NAME_ASC = "+name";
@@ -1900,18 +2543,30 @@ class KalturaPlaylistOrderBy
 	const WEIGHT_DESC = "-weight";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaReportInterval
 {
 	const MONTHS = "months";
 	const DAYS = "days";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaReportOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSchemaType
 {
 	const SYNDICATION = "syndication";
@@ -1922,6 +2577,10 @@ class KalturaSchemaType
 	const INGEST_API = "cuePoint.ingestAPI";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSearchConditionComparison
 {
 	const EQUAL = "1";
@@ -1934,6 +2593,10 @@ class KalturaSearchConditionComparison
 	const LESS_THAN_OR_EQUEL = "5";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSourceType
 {
 	const FILE = "1";
@@ -1945,6 +2608,10 @@ class KalturaSourceType
 	const LIMELIGHT_LIVE = "limeLight.LIVE_STREAM";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaStorageProfileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
@@ -1953,18 +2620,30 @@ class KalturaStorageProfileOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaSyndicationFeedEntriesOrderBy
 {
 	const CREATED_AT_DESC = "-createdAt";
 	const RECENT = "recent";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaTaggedObjectType
 {
 	const ENTRY = "1";
 	const CATEGORY = "2";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaThumbAssetOrderBy
 {
 	const SIZE_ASC = "+size";
@@ -1977,14 +2656,26 @@ class KalturaThumbAssetOrderBy
 	const DELETED_AT_DESC = "-deletedAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaThumbParamsOrderBy
 {
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaThumbParamsOutputOrderBy
 {
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaTubeMogulSyndicationFeedCategories
 {
 	const ARTS_AND_ANIMATION = "Arts &amp; Animation";
@@ -2004,6 +2695,10 @@ class KalturaTubeMogulSyndicationFeedCategories
 	const FAMILY_AND_KIDS = "Family &amp; Kids";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaTubeMogulSyndicationFeedOrderBy
 {
 	const PLAYLIST_ID_ASC = "+playlistId";
@@ -2016,6 +2711,10 @@ class KalturaTubeMogulSyndicationFeedOrderBy
 	const CREATED_AT_DESC = "-createdAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUiConfOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
@@ -2024,16 +2723,28 @@ class KalturaUiConfOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUploadTokenOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUserLoginDataOrderBy
 {
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUserOrderBy
 {
 	const ID_ASC = "+id";
@@ -2042,6 +2753,10 @@ class KalturaUserOrderBy
 	const CREATED_AT_DESC = "-createdAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaUserRoleOrderBy
 {
 	const ID_ASC = "+id";
@@ -2054,6 +2769,10 @@ class KalturaUserRoleOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaVideoCodec
 {
 	const NONE = "";
@@ -2074,18 +2793,30 @@ class KalturaVideoCodec
 	const COPY = "copy";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaWidgetOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaYahooSyndicationFeedAdultValues
 {
 	const ADULT = "adult";
 	const NON_ADULT = "nonadult";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaYahooSyndicationFeedCategories
 {
 	const ACTION = "Action";
@@ -2110,6 +2841,10 @@ class KalturaYahooSyndicationFeedCategories
 	const TRAVEL = "Travel";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaYahooSyndicationFeedOrderBy
 {
 	const PLAYLIST_ID_ASC = "+playlistId";

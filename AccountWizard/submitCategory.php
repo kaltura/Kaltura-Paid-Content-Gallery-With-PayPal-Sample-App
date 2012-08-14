@@ -1,4 +1,5 @@
 <?php
+set_time_limit(0);
 //This script submits the entered information for the selected category.
 //This can either make a free category into a paid content category or
 //reverse the process to make the category free again.

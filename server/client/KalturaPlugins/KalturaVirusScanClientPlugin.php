@@ -27,10 +27,18 @@
 // @ignore
 // ===================================================================================================
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
 require_once(dirname(__FILE__) . "/../KalturaEnums.php");
 require_once(dirname(__FILE__) . "/../KalturaTypes.php");
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaVirusFoundAction
 {
 	const NONE = 0;
@@ -39,6 +47,22 @@ class KalturaVirusFoundAction
 	const CLEAN_DELETE = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaVirusScanJobResult
+{
+	const SCAN_ERROR = 1;
+	const FILE_IS_CLEAN = 2;
+	const FILE_WAS_CLEANED = 3;
+	const FILE_INFECTED = 4;
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaVirusScanProfileStatus
 {
 	const DISABLED = 1;
@@ -46,13 +70,22 @@ class KalturaVirusScanProfileStatus
 	const DELETED = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaVirusScanEngineType
 {
 	const SYMANTEC_SCAN_ENGINE = "symantecScanEngine.SymantecScanEngine";
 	const SYMANTEC_SCAN_JAVA_ENGINE = "symantecScanEngine.SymantecScanJavaEngine";
 	const SYMANTEC_SCAN_DIRECT_ENGINE = "symantecScanEngine.SymantecScanDirectEngine";
+	const CLAMAV_SCAN_ENGINE = "clamAVScanEngine.ClamAV";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaVirusScanProfileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
@@ -61,6 +94,10 @@ class KalturaVirusScanProfileOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaVirusScanProfile extends KalturaObjectBase
 {
 	/**
@@ -133,6 +170,10 @@ class KalturaVirusScanProfile extends KalturaObjectBase
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaVirusScanProfileListResponse extends KalturaObjectBase
 {
 	/**
@@ -154,6 +195,63 @@ class KalturaVirusScanProfileListResponse extends KalturaObjectBase
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaParseCaptionAssetJobData extends KalturaJobData
+{
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	public $captionAssetId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaVirusScanJobData extends KalturaJobData
+{
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	public $srcFilePath = null;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	public $flavorAssetId = null;
+
+	/**
+	 * 
+	 *
+	 * @var KalturaVirusScanJobResult
+	 */
+	public $scanResult = null;
+
+	/**
+	 * 
+	 *
+	 * @var KalturaVirusFoundAction
+	 */
+	public $virusFoundAction = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaVirusScanProfileBaseFilter extends KalturaFilter
 {
 	/**
@@ -257,12 +355,20 @@ abstract class KalturaVirusScanProfileBaseFilter extends KalturaFilter
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaVirusScanProfileFilter extends KalturaVirusScanProfileBaseFilter
 {
 
 }
 
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaVirusScanProfileService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -353,6 +459,10 @@ class KalturaVirusScanProfileService extends KalturaServiceBase
 		return $resultObject;
 	}
 }
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaVirusScanClientPlugin extends KalturaClientPlugin
 {
 	/**

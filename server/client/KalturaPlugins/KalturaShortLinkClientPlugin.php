@@ -27,10 +27,18 @@
 // @ignore
 // ===================================================================================================
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
 require_once(dirname(__FILE__) . "/../KalturaEnums.php");
 require_once(dirname(__FILE__) . "/../KalturaTypes.php");
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaShortLinkStatus
 {
 	const DISABLED = 1;
@@ -38,6 +46,10 @@ class KalturaShortLinkStatus
 	const DELETED = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaShortLinkOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
@@ -48,6 +60,10 @@ class KalturaShortLinkOrderBy
 	const EXPIRES_AT_DESC = "-expiresAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaShortLink extends KalturaObjectBase
 {
 	/**
@@ -127,6 +143,10 @@ class KalturaShortLink extends KalturaObjectBase
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaShortLinkListResponse extends KalturaObjectBase
 {
 	/**
@@ -148,6 +168,10 @@ class KalturaShortLinkListResponse extends KalturaObjectBase
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaShortLinkBaseFilter extends KalturaFilter
 {
 	/**
@@ -265,12 +289,20 @@ abstract class KalturaShortLinkBaseFilter extends KalturaFilter
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaShortLinkFilter extends KalturaShortLinkBaseFilter
 {
 
 }
 
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaShortLinkService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -357,6 +389,10 @@ class KalturaShortLinkService extends KalturaServiceBase
 		return $resultObject;
 	}
 }
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaShortLinkClientPlugin extends KalturaClientPlugin
 {
 	/**

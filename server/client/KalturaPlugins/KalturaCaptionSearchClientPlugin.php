@@ -27,11 +27,19 @@
 // @ignore
 // ===================================================================================================
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
 require_once(dirname(__FILE__) . "/../KalturaEnums.php");
 require_once(dirname(__FILE__) . "/../KalturaTypes.php");
 require_once(dirname(__FILE__) . "/KalturaCaptionClientPlugin.php");
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCaptionAssetItem extends KalturaObjectBase
 {
 	/**
@@ -74,6 +82,10 @@ class KalturaCaptionAssetItem extends KalturaObjectBase
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCaptionAssetItemListResponse extends KalturaObjectBase
 {
 	/**
@@ -95,6 +107,10 @@ class KalturaCaptionAssetItemListResponse extends KalturaObjectBase
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCaptionAssetItemFilter extends KalturaCaptionAssetFilter
 {
 	/**
@@ -199,6 +215,10 @@ class KalturaCaptionAssetItemFilter extends KalturaCaptionAssetFilter
 }
 
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCaptionAssetItemService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -224,6 +244,10 @@ class KalturaCaptionAssetItemService extends KalturaServiceBase
 		return $resultObject;
 	}
 }
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCaptionSearchClientPlugin extends KalturaClientPlugin
 {
 	/**

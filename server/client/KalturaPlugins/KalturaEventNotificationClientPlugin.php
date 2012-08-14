@@ -34,63 +34,53 @@
 require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
 require_once(dirname(__FILE__) . "/../KalturaEnums.php");
 require_once(dirname(__FILE__) . "/../KalturaTypes.php");
-require_once(dirname(__FILE__) . "/KalturaCuePointClientPlugin.php");
 
 /**
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCodeCuePointOrderBy
+class KalturaEventNotificationTemplateStatus
 {
-	const END_TIME_ASC = "+endTime";
-	const END_TIME_DESC = "-endTime";
-	const DURATION_ASC = "+duration";
-	const DURATION_DESC = "-duration";
+	const DISABLED = 1;
+	const ACTIVE = 2;
+	const DELETED = 3;
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEventNotificationTemplateOrderBy
+{
+	const ID_ASC = "+id";
+	const ID_DESC = "-id";
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
 	const UPDATED_AT_DESC = "-updatedAt";
-	const START_TIME_ASC = "+startTime";
-	const START_TIME_DESC = "-startTime";
-	const PARTNER_SORT_VALUE_ASC = "+partnerSortValue";
-	const PARTNER_SORT_VALUE_DESC = "-partnerSortValue";
 }
 
 /**
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCodeCuePoint extends KalturaCuePoint
+class KalturaEventNotificationTemplateType
+{
+	const EMAIL = "emailNotification.Email";
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEventNotificationDispatchJobData extends KalturaJobData
 {
 	/**
 	 * 
 	 *
-	 * @var string
-	 */
-	public $code = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $description = null;
-
-	/**
-	 * 
-	 *
 	 * @var int
 	 */
-	public $endTime = null;
-
-	/**
-	 * Duration in milliseconds
-	 * 	 
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $duration = null;
+	public $templateId = null;
 
 
 }
@@ -99,91 +89,91 @@ class KalturaCodeCuePoint extends KalturaCuePoint
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaCodeCuePointBaseFilter extends KalturaCuePointFilter
+abstract class KalturaEventNotificationTemplateBaseFilter extends KalturaFilter
 {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var int
 	 */
-	public $codeLike = null;
+	public $idEqual = null;
 
 	/**
 	 * 
 	 *
 	 * @var string
 	 */
-	public $codeMultiLikeOr = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $codeMultiLikeAnd = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $codeEqual = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $codeIn = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $descriptionLike = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $descriptionMultiLikeOr = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $descriptionMultiLikeAnd = null;
+	public $idIn = null;
 
 	/**
 	 * 
 	 *
 	 * @var int
 	 */
-	public $endTimeGreaterThanOrEqual = null;
+	public $partnerIdEqual = null;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	public $partnerIdIn = null;
+
+	/**
+	 * 
+	 *
+	 * @var KalturaEventNotificationTemplateType
+	 */
+	public $typeEqual = null;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	public $typeIn = null;
+
+	/**
+	 * 
+	 *
+	 * @var KalturaEventNotificationTemplateStatus
+	 */
+	public $statusEqual = null;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	public $statusIn = null;
 
 	/**
 	 * 
 	 *
 	 * @var int
 	 */
-	public $endTimeLessThanOrEqual = null;
+	public $createdAtGreaterThanOrEqual = null;
 
 	/**
 	 * 
 	 *
 	 * @var int
 	 */
-	public $durationGreaterThanOrEqual = null;
+	public $createdAtLessThanOrEqual = null;
 
 	/**
 	 * 
 	 *
 	 * @var int
 	 */
-	public $durationLessThanOrEqual = null;
+	public $updatedAtGreaterThanOrEqual = null;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	public $updatedAtLessThanOrEqual = null;
 
 
 }
@@ -192,7 +182,7 @@ abstract class KalturaCodeCuePointBaseFilter extends KalturaCuePointFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCodeCuePointFilter extends KalturaCodeCuePointBaseFilter
+class KalturaEventNotificationTemplateFilter extends KalturaEventNotificationTemplateBaseFilter
 {
 
 }
@@ -201,7 +191,7 @@ class KalturaCodeCuePointFilter extends KalturaCodeCuePointBaseFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCodeCuePointClientPlugin extends KalturaClientPlugin
+class KalturaEventNotificationClientPlugin extends KalturaClientPlugin
 {
 	protected function __construct(KalturaClient $client)
 	{
@@ -209,11 +199,11 @@ class KalturaCodeCuePointClientPlugin extends KalturaClientPlugin
 	}
 
 	/**
-	 * @return KalturaCodeCuePointClientPlugin
+	 * @return KalturaEventNotificationClientPlugin
 	 */
 	public static function get(KalturaClient $client)
 	{
-		return new KalturaCodeCuePointClientPlugin($client);
+		return new KalturaEventNotificationClientPlugin($client);
 	}
 
 	/**
@@ -231,7 +221,7 @@ class KalturaCodeCuePointClientPlugin extends KalturaClientPlugin
 	 */
 	public function getName()
 	{
-		return 'codeCuePoint';
+		return 'eventNotification';
 	}
 }
 

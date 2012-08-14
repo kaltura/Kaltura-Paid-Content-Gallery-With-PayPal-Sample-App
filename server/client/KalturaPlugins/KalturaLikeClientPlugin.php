@@ -34,35 +34,82 @@
 require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
 require_once(dirname(__FILE__) . "/../KalturaEnums.php");
 require_once(dirname(__FILE__) . "/../KalturaTypes.php");
-require_once(dirname(__FILE__) . "/KalturaBulkUploadXmlClientPlugin.php");
-require_once(dirname(__FILE__) . "/KalturaDropFolderClientPlugin.php");
+
 
 /**
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaDropFolderXmlBulkUploadFileHandlerConfig extends KalturaDropFolderFileHandlerConfig
+class KalturaLikeService extends KalturaServiceBase
 {
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaDropFolderXmlBulkUploadClientPlugin extends KalturaClientPlugin
-{
-	protected function __construct(KalturaClient $client)
+	function __construct(KalturaClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
+	function like($entryId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "entryId", $entryId);
+		$this->client->queueServiceActionCall("like_like", "like", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	function unlike($entryId)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "entryId", $entryId);
+		$this->client->queueServiceActionCall("like_like", "unlike", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+
+	function checkLikeExists($entryId, $userId = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "entryId", $entryId);
+		$this->client->addParam($kparams, "userId", $userId);
+		$this->client->queueServiceActionCall("like_like", "checkLikeExists", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$resultObject = (bool) $resultObject;
+		return $resultObject;
+	}
+}
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaLikeClientPlugin extends KalturaClientPlugin
+{
 	/**
-	 * @return KalturaDropFolderXmlBulkUploadClientPlugin
+	 * @var KalturaLikeService
+	 */
+	public $like = null;
+
+	protected function __construct(KalturaClient $client)
+	{
+		parent::__construct($client);
+		$this->like = new KalturaLikeService($client);
+	}
+
+	/**
+	 * @return KalturaLikeClientPlugin
 	 */
 	public static function get(KalturaClient $client)
 	{
-		return new KalturaDropFolderXmlBulkUploadClientPlugin($client);
+		return new KalturaLikeClientPlugin($client);
 	}
 
 	/**
@@ -71,6 +118,7 @@ class KalturaDropFolderXmlBulkUploadClientPlugin extends KalturaClientPlugin
 	public function getServices()
 	{
 		$services = array(
+			'like' => $this->like,
 		);
 		return $services;
 	}
@@ -80,7 +128,7 @@ class KalturaDropFolderXmlBulkUploadClientPlugin extends KalturaClientPlugin
 	 */
 	public function getName()
 	{
-		return 'dropFolderXmlBulkUpload';
+		return 'like';
 	}
 }
 

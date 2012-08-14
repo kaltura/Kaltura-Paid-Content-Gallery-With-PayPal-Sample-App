@@ -61,3 +61,20 @@ if($results->totalCount == 0) {
 	$viewsData = "";
 	$results = $client->metadataProfile->add($metadataProfile, $xsdData, $viewsData);
 }
+
+//Adds the metadata profile for users
+$filter = new KalturaMetadataProfileFilter();
+$filter->nameEqual = 'PayPal (Users)';
+$pager = new KalturaFilterPager();
+$pager->pageSize = 500;
+$pager->pageIndex = 1;
+$results = $client->metadataProfile->listAction($filter, $pager);
+if($results->totalCount == 0) {
+	$xsdData = file_get_contents('paypalUserSchema.sdx');
+	$metadataProfile = new KalturaMetadataProfile();
+	$metadataProfile->metadataObjectType = 3;
+	$metadataProfile->name = 'PayPal (Users)';
+	$metadataProfile->createMode = KalturaMetadataProfileCreateMode::API;
+	$viewsData = "";
+	$results = $client->metadataProfile->add($metadataProfile, $xsdData, $viewsData);
+}

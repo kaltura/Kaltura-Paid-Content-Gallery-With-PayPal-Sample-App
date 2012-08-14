@@ -27,11 +27,19 @@
 // @ignore
 // ===================================================================================================
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
 require_once(dirname(__FILE__) . "/../KalturaEnums.php");
 require_once(dirname(__FILE__) . "/../KalturaTypes.php");
 require_once(dirname(__FILE__) . "/KalturaCuePointClientPlugin.php");
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAnnotationOrderBy
 {
 	const END_TIME_ASC = "+endTime";
@@ -48,27 +56,10 @@ class KalturaAnnotationOrderBy
 	const PARTNER_SORT_VALUE_DESC = "-partnerSortValue";
 }
 
-class KalturaAnnotationListResponse extends KalturaObjectBase
-{
-	/**
-	 * 
-	 *
-	 * @var array of KalturaAnnotation
-	 * @readonly
-	 */
-	public $objects;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 * @readonly
-	 */
-	public $totalCount = null;
-
-
-}
-
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAnnotation extends KalturaCuePoint
 {
 	/**
@@ -106,6 +97,35 @@ class KalturaAnnotation extends KalturaCuePoint
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaAnnotationListResponse extends KalturaObjectBase
+{
+	/**
+	 * 
+	 *
+	 * @var array of KalturaAnnotation
+	 * @readonly
+	 */
+	public $objects;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $totalCount = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaAnnotationBaseFilter extends KalturaCuePointFilter
 {
 	/**
@@ -174,12 +194,20 @@ abstract class KalturaAnnotationBaseFilter extends KalturaCuePointFilter
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAnnotationFilter extends KalturaAnnotationBaseFilter
 {
 
 }
 
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAnnotationService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -296,6 +324,10 @@ class KalturaAnnotationService extends KalturaServiceBase
 		return $resultObject;
 	}
 }
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaAnnotationClientPlugin extends KalturaClientPlugin
 {
 	/**

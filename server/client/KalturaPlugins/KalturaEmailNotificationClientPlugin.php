@@ -34,63 +34,136 @@
 require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
 require_once(dirname(__FILE__) . "/../KalturaEnums.php");
 require_once(dirname(__FILE__) . "/../KalturaTypes.php");
-require_once(dirname(__FILE__) . "/KalturaCuePointClientPlugin.php");
+require_once(dirname(__FILE__) . "/KalturaEventNotificationClientPlugin.php");
 
 /**
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCodeCuePointOrderBy
+class KalturaEmailNotificationTemplatePriority
 {
-	const END_TIME_ASC = "+endTime";
-	const END_TIME_DESC = "-endTime";
-	const DURATION_ASC = "+duration";
-	const DURATION_DESC = "-duration";
+	const HIGH = 1;
+	const NORMAL = 3;
+	const LOW = 5;
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEmailNotificationTemplateOrderBy
+{
+	const ID_ASC = "+id";
+	const ID_DESC = "-id";
 	const CREATED_AT_ASC = "+createdAt";
 	const CREATED_AT_DESC = "-createdAt";
 	const UPDATED_AT_ASC = "+updatedAt";
 	const UPDATED_AT_DESC = "-updatedAt";
-	const START_TIME_ASC = "+startTime";
-	const START_TIME_DESC = "-startTime";
-	const PARTNER_SORT_VALUE_ASC = "+partnerSortValue";
-	const PARTNER_SORT_VALUE_DESC = "-partnerSortValue";
 }
 
 /**
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCodeCuePoint extends KalturaCuePoint
+class KalturaEmailNotificationDispatchJobData extends KalturaEventNotificationDispatchJobData
 {
 	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $code = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $description = null;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	public $endTime = null;
-
-	/**
-	 * Duration in milliseconds
+	 * Define the email sender email
 	 * 	 
 	 *
-	 * @var int
-	 * @readonly
+	 * @var string
 	 */
-	public $duration = null;
+	public $fromEmail = null;
+
+	/**
+	 * Define the email sender name
+	 * 	 
+	 *
+	 * @var string
+	 */
+	public $fromName = null;
+
+	/**
+	 * Email recipient emails and names, key is mail address and value is the name
+	 * 	 
+	 *
+	 * @var array of KalturaKeyValue
+	 */
+	public $to;
+
+	/**
+	 * Email cc emails and names, key is mail address and value is the name
+	 * 	 
+	 *
+	 * @var array of KalturaKeyValue
+	 */
+	public $cc;
+
+	/**
+	 * Email bcc emails and names, key is mail address and value is the name
+	 * 	 
+	 *
+	 * @var array of KalturaKeyValue
+	 */
+	public $bcc;
+
+	/**
+	 * Email addresses that a replies should be sent to, key is mail address and value is the name
+	 * 	 
+	 *
+	 * @var array of KalturaKeyValue
+	 */
+	public $replyTo;
+
+	/**
+	 * Define the email priority
+	 * 	 
+	 *
+	 * @var KalturaEmailNotificationTemplatePriority
+	 */
+	public $priority = null;
+
+	/**
+	 * Email address that a reading confirmation will be sent to
+	 * 	 
+	 *
+	 * @var string
+	 */
+	public $confirmReadingTo = null;
+
+	/**
+	 * Hostname to use in Message-Id and Received headers and as default HELO string. 
+	 * 	 If empty, the value returned by SERVER_NAME is used or 'localhost.localdomain'.
+	 * 	 
+	 *
+	 * @var string
+	 */
+	public $hostname = null;
+
+	/**
+	 * Sets the message ID to be used in the Message-Id header.
+	 * 	 If empty, a unique id will be generated.
+	 * 	 
+	 *
+	 * @var string
+	 */
+	public $messageID = null;
+
+	/**
+	 * Adds a e-mail custom header
+	 * 	 
+	 *
+	 * @var array of KalturaKeyValue
+	 */
+	public $customHeaders;
+
+	/**
+	 * Define the content dynamic parameters
+	 * 	 
+	 *
+	 * @var array of KalturaKeyValue
+	 */
+	public $contentParameters;
 
 
 }
@@ -99,100 +172,7 @@ class KalturaCodeCuePoint extends KalturaCuePoint
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaCodeCuePointBaseFilter extends KalturaCuePointFilter
-{
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $codeLike = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $codeMultiLikeOr = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $codeMultiLikeAnd = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $codeEqual = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $codeIn = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $descriptionLike = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $descriptionMultiLikeOr = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $descriptionMultiLikeAnd = null;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	public $endTimeGreaterThanOrEqual = null;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	public $endTimeLessThanOrEqual = null;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	public $durationGreaterThanOrEqual = null;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	public $durationLessThanOrEqual = null;
-
-
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCodeCuePointFilter extends KalturaCodeCuePointBaseFilter
+abstract class KalturaEmailNotificationTemplateBaseFilter extends KalturaEventNotificationTemplateFilter
 {
 
 }
@@ -201,7 +181,16 @@ class KalturaCodeCuePointFilter extends KalturaCodeCuePointBaseFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCodeCuePointClientPlugin extends KalturaClientPlugin
+class KalturaEmailNotificationTemplateFilter extends KalturaEmailNotificationTemplateBaseFilter
+{
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaEmailNotificationClientPlugin extends KalturaClientPlugin
 {
 	protected function __construct(KalturaClient $client)
 	{
@@ -209,11 +198,11 @@ class KalturaCodeCuePointClientPlugin extends KalturaClientPlugin
 	}
 
 	/**
-	 * @return KalturaCodeCuePointClientPlugin
+	 * @return KalturaEmailNotificationClientPlugin
 	 */
 	public static function get(KalturaClient $client)
 	{
-		return new KalturaCodeCuePointClientPlugin($client);
+		return new KalturaEmailNotificationClientPlugin($client);
 	}
 
 	/**
@@ -231,7 +220,7 @@ class KalturaCodeCuePointClientPlugin extends KalturaClientPlugin
 	 */
 	public function getName()
 	{
-		return 'codeCuePoint';
+		return 'emailNotification';
 	}
 }
 

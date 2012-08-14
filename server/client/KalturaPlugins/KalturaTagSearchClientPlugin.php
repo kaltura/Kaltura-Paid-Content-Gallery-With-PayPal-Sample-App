@@ -34,63 +34,60 @@
 require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
 require_once(dirname(__FILE__) . "/../KalturaEnums.php");
 require_once(dirname(__FILE__) . "/../KalturaTypes.php");
-require_once(dirname(__FILE__) . "/KalturaCuePointClientPlugin.php");
 
 /**
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCodeCuePointOrderBy
-{
-	const END_TIME_ASC = "+endTime";
-	const END_TIME_DESC = "-endTime";
-	const DURATION_ASC = "+duration";
-	const DURATION_DESC = "-duration";
-	const CREATED_AT_ASC = "+createdAt";
-	const CREATED_AT_DESC = "-createdAt";
-	const UPDATED_AT_ASC = "+updatedAt";
-	const UPDATED_AT_DESC = "-updatedAt";
-	const START_TIME_ASC = "+startTime";
-	const START_TIME_DESC = "-startTime";
-	const PARTNER_SORT_VALUE_ASC = "+partnerSortValue";
-	const PARTNER_SORT_VALUE_DESC = "-partnerSortValue";
-}
-
-/**
- * @package Kaltura
- * @subpackage Client
- */
-class KalturaCodeCuePoint extends KalturaCuePoint
+class KalturaTag extends KalturaObjectBase
 {
 	/**
 	 * 
-	 *
-	 * @var string
-	 */
-	public $code = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $description = null;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	public $endTime = null;
-
-	/**
-	 * Duration in milliseconds
-	 * 	 
 	 *
 	 * @var int
 	 * @readonly
 	 */
-	public $duration = null;
+	public $id = null;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 * @readonly
+	 */
+	public $tag = null;
+
+	/**
+	 * 
+	 *
+	 * @var KalturaTaggedObjectType
+	 * @readonly
+	 */
+	public $taggedObjectType = null;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $partnerId = null;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $instanceCount = null;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 * @readonly
+	 */
+	public $createdAt = null;
 
 
 }
@@ -99,91 +96,23 @@ class KalturaCodeCuePoint extends KalturaCuePoint
  * @package Kaltura
  * @subpackage Client
  */
-abstract class KalturaCodeCuePointBaseFilter extends KalturaCuePointFilter
+class KalturaTagListResponse extends KalturaObjectBase
 {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var array of KalturaTag
+	 * @readonly
 	 */
-	public $codeLike = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $codeMultiLikeOr = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $codeMultiLikeAnd = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $codeEqual = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $codeIn = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $descriptionLike = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $descriptionMultiLikeOr = null;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	public $descriptionMultiLikeAnd = null;
+	public $objects;
 
 	/**
 	 * 
 	 *
 	 * @var int
+	 * @readonly
 	 */
-	public $endTimeGreaterThanOrEqual = null;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	public $endTimeLessThanOrEqual = null;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	public $durationGreaterThanOrEqual = null;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	public $durationLessThanOrEqual = null;
+	public $totalCount = null;
 
 
 }
@@ -192,28 +121,96 @@ abstract class KalturaCodeCuePointBaseFilter extends KalturaCuePointFilter
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCodeCuePointFilter extends KalturaCodeCuePointBaseFilter
+class KalturaTagFilter extends KalturaFilter
 {
+	/**
+	 * 
+	 *
+	 * @var KalturaTaggedObjectType
+	 */
+	public $objectTypeEqual = null;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	public $tagEqual = null;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	public $tagStartsWith = null;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	public $instanceCountEqual = null;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	public $instanceCountIn = null;
+
 
 }
+
 
 /**
  * @package Kaltura
  * @subpackage Client
  */
-class KalturaCodeCuePointClientPlugin extends KalturaClientPlugin
+class KalturaTagService extends KalturaServiceBase
 {
-	protected function __construct(KalturaClient $client)
+	function __construct(KalturaClient $client = null)
 	{
 		parent::__construct($client);
 	}
 
+	function search(KalturaTagFilter $tagFilter, KalturaFilterPager $pager = null)
+	{
+		$kparams = array();
+		$this->client->addParam($kparams, "tagFilter", $tagFilter->toParams());
+		if ($pager !== null)
+			$this->client->addParam($kparams, "pager", $pager->toParams());
+		$this->client->queueServiceActionCall("tagsearch_tag", "search", $kparams);
+		if ($this->client->isMultiRequest())
+			return $this->client->getMultiRequestResult();
+		$resultObject = $this->client->doQueue();
+		$this->client->throwExceptionIfError($resultObject);
+		$this->client->validateObjectType($resultObject, "KalturaTagListResponse");
+		return $resultObject;
+	}
+}
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTagSearchClientPlugin extends KalturaClientPlugin
+{
 	/**
-	 * @return KalturaCodeCuePointClientPlugin
+	 * @var KalturaTagService
+	 */
+	public $tag = null;
+
+	protected function __construct(KalturaClient $client)
+	{
+		parent::__construct($client);
+		$this->tag = new KalturaTagService($client);
+	}
+
+	/**
+	 * @return KalturaTagSearchClientPlugin
 	 */
 	public static function get(KalturaClient $client)
 	{
-		return new KalturaCodeCuePointClientPlugin($client);
+		return new KalturaTagSearchClientPlugin($client);
 	}
 
 	/**
@@ -222,6 +219,7 @@ class KalturaCodeCuePointClientPlugin extends KalturaClientPlugin
 	public function getServices()
 	{
 		$services = array(
+			'tag' => $this->tag,
 		);
 		return $services;
 	}
@@ -231,7 +229,7 @@ class KalturaCodeCuePointClientPlugin extends KalturaClientPlugin
 	 */
 	public function getName()
 	{
-		return 'codeCuePoint';
+		return 'tagSearch';
 	}
 }
 

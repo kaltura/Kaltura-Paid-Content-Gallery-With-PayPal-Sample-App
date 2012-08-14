@@ -27,10 +27,18 @@
 // @ignore
 // ===================================================================================================
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
 require_once(dirname(__FILE__) . "/../KalturaEnums.php");
 require_once(dirname(__FILE__) . "/../KalturaTypes.php");
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaFileSyncStatus
 {
 	const ERROR = -1;
@@ -40,6 +48,10 @@ class KalturaFileSyncStatus
 	const PURGED = 4;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaFileSyncType
 {
 	const FILE = 1;
@@ -47,6 +59,10 @@ class KalturaFileSyncType
 	const URL = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaFileSyncOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
@@ -61,6 +77,10 @@ class KalturaFileSyncOrderBy
 	const FILE_SIZE_DESC = "-fileSize";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaFileSyncBaseFilter extends KalturaFilter
 {
 	/**
@@ -269,11 +289,19 @@ abstract class KalturaFileSyncBaseFilter extends KalturaFilter
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaFileSyncFilter extends KalturaFileSyncBaseFilter
 {
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaFileSyncClientPlugin extends KalturaClientPlugin
 {
 	protected function __construct(KalturaClient $client)

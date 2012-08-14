@@ -27,10 +27,18 @@
 // @ignore
 // ===================================================================================================
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 require_once(dirname(__FILE__) . "/../KalturaClientBase.php");
 require_once(dirname(__FILE__) . "/../KalturaEnums.php");
 require_once(dirname(__FILE__) . "/../KalturaTypes.php");
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadataProfileCreateMode
 {
 	const API = 1;
@@ -38,6 +46,10 @@ class KalturaMetadataProfileCreateMode
 	const APP = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadataProfileStatus
 {
 	const ACTIVE = 1;
@@ -45,6 +57,10 @@ class KalturaMetadataProfileStatus
 	const TRANSFORMING = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadataStatus
 {
 	const VALID = 1;
@@ -52,6 +68,10 @@ class KalturaMetadataStatus
 	const DELETED = 3;
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadataObjectType
 {
 	const ENTRY = "1";
@@ -63,6 +83,10 @@ class KalturaMetadataObjectType
 	const CODE_CUE_POINT = "codeCuePoint.CodeCuePoint";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadataOrderBy
 {
 	const METADATA_PROFILE_VERSION_ASC = "+metadataProfileVersion";
@@ -75,6 +99,10 @@ class KalturaMetadataOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadataProfileOrderBy
 {
 	const CREATED_AT_ASC = "+createdAt";
@@ -83,6 +111,10 @@ class KalturaMetadataProfileOrderBy
 	const UPDATED_AT_DESC = "-updatedAt";
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadata extends KalturaObjectBase
 {
 	/**
@@ -176,6 +208,10 @@ class KalturaMetadata extends KalturaObjectBase
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadataListResponse extends KalturaObjectBase
 {
 	/**
@@ -197,6 +233,10 @@ class KalturaMetadataListResponse extends KalturaObjectBase
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadataProfile extends KalturaObjectBase
 {
 	/**
@@ -309,6 +349,10 @@ class KalturaMetadataProfile extends KalturaObjectBase
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadataProfileField extends KalturaObjectBase
 {
 	/**
@@ -346,6 +390,10 @@ class KalturaMetadataProfileField extends KalturaObjectBase
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadataProfileFieldListResponse extends KalturaObjectBase
 {
 	/**
@@ -367,6 +415,10 @@ class KalturaMetadataProfileFieldListResponse extends KalturaObjectBase
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadataProfileListResponse extends KalturaObjectBase
 {
 	/**
@@ -388,6 +440,40 @@ class KalturaMetadataProfileListResponse extends KalturaObjectBase
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaImportMetadataJobData extends KalturaJobData
+{
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	public $srcFileUrl = null;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	public $destFileLocalPath = null;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	public $metadataId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaMetadataBaseFilter extends KalturaFilter
 {
 	/**
@@ -512,6 +598,10 @@ abstract class KalturaMetadataBaseFilter extends KalturaFilter
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 abstract class KalturaMetadataProfileBaseFilter extends KalturaFilter
 {
 	/**
@@ -643,6 +733,54 @@ abstract class KalturaMetadataProfileBaseFilter extends KalturaFilter
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
+class KalturaTransformMetadataJobData extends KalturaJobData
+{
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	public $srcXslPath = null;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	public $srcVersion = null;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	public $destVersion = null;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	public $destXsdPath = null;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	public $metadataProfileId = null;
+
+
+}
+
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaCompareMetadataCondition extends KalturaCompareCondition
 {
 	/**
@@ -667,6 +805,10 @@ class KalturaCompareMetadataCondition extends KalturaCompareCondition
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMatchMetadataCondition extends KalturaMatchCondition
 {
 	/**
@@ -691,16 +833,28 @@ class KalturaMatchMetadataCondition extends KalturaMatchCondition
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadataFilter extends KalturaMetadataBaseFilter
 {
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadataProfileFilter extends KalturaMetadataProfileBaseFilter
 {
 
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadataSearchItem extends KalturaSearchOperator
 {
 	/**
@@ -721,6 +875,10 @@ class KalturaMetadataSearchItem extends KalturaSearchOperator
 }
 
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadataService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -889,6 +1047,10 @@ class KalturaMetadataService extends KalturaServiceBase
 	}
 }
 
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadataProfileService extends KalturaServiceBase
 {
 	function __construct(KalturaClient $client = null)
@@ -1075,6 +1237,10 @@ class KalturaMetadataProfileService extends KalturaServiceBase
 		return $resultObject;
 	}
 }
+/**
+ * @package Kaltura
+ * @subpackage Client
+ */
 class KalturaMetadataClientPlugin extends KalturaClientPlugin
 {
 	/**

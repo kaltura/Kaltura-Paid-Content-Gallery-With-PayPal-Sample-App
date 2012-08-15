@@ -124,10 +124,34 @@ else {
 	$pager->pageIndex = 1;
 	$entries = $client->categoryEntry->listAction($filter, $pager)->objects;
 	foreach($entries as $entry) {
-		if($client->media->get($entry->entryId)->accessControlId != $default) {
-			$mediaEntry = new KalturaMediaEntry();
-			$mediaEntry->accessControlId = $default;
-			$update = $client->media->update($entry->entryId, $mediaEntry);
+		$mediaEntry = $client->media->get($entry->entryId);
+		if($mediaEntry->accessControlId != $default) {
+			$filter = new KalturaMediaEntryFilter();
+			$filter->idEqual = $entry->entryId;
+			$pager = new KalturaFilterPager();
+			$pager->pageSize = 1;
+			$pager->pageIndex = 1;
+			$filterAdvancedSearch = new KalturaMetadataSearchItem();
+			$filterAdvancedSearch->type = KalturaSearchOperatorType::SEARCH_AND;
+			$metaFilter = new KalturaMetadataProfileFilter();
+			$metaFilter->nameEqual = 'PayPal (Entries)';
+			$metaPager = new KalturaFilterPager();
+			$metaPager->pageSize = 1;
+			$metaPager->pageIndex = 1;			
+			$filterAdvancedSearch->metadataProfileId = $client->metadataProfile->listAction($metaFilter, $metaPager)->objects[0]->id;
+			$filterAdvancedSearchItems = array();
+			$filterAdvancedSearchItems0 = new KalturaSearchCondition();
+			$filterAdvancedSearchItems0->field = "/*[local-name()='metadata']/*[local-name()='Paid']";
+			$filterAdvancedSearchItems0->value = 'true';
+			$filterAdvancedSearchItems[0] = $filterAdvancedSearchItems0;
+			$filterAdvancedSearch->items = $filterAdvancedSearchItems;
+			$filter->advancedSearch = $filterAdvancedSearch;
+			$paidContent = $client->media->listAction($filter, $pager)->objects;
+			if(count($paidContent) == 0) {
+				$mediaEntry = new KalturaMediaEntry();
+				$mediaEntry->accessControlId = $default;
+				$update = $client->media->update($entry->entryId, $mediaEntry);
+			}
 		}
 	}
 	echo 'success';

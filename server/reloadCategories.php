@@ -29,6 +29,25 @@ $pager->pageIndex = $_REQUEST['page'];
 $categories = $client->category->listAction($filter, $pager);
 $categoryCount = 0;
 foreach($categories->objects as $category) {
+	$paidCategory = false;
+	$filter = new KalturaCategoryFilter();
+	$filter->idEqual = $category->id;
+	$pager = new KalturaFilterPager();
+	$pager->pageSize = 1;
+	$pager->pageIndex = 1;
+	$filterAdvancedSearch = new KalturaMetadataSearchItem();
+	$filterAdvancedSearch->type = KalturaSearchOperatorType::SEARCH_AND;
+	$filterAdvancedSearch->metadataProfileId = PAYPAL_CATEGORY_METADATA_PROFILE_ID;
+	$filterAdvancedSearchItems = array();
+	$filterAdvancedSearchItems0 = new KalturaSearchCondition();
+	$filterAdvancedSearchItems0->field = "/*[local-name()='metadata']/*[local-name()='Paid']";
+	$filterAdvancedSearchItems0->value = 'true';
+	$filterAdvancedSearchItems[0] = $filterAdvancedSearchItems0;
+	$filterAdvancedSearch->items = $filterAdvancedSearchItems;
+	$filter->advancedSearch = $filterAdvancedSearch;
+	$payCheck = $client->category->listAction($filter, $pager)->objects;
+	if(count($payCheck) > 0)
+		$paidCategory = true;
 	//Then retrieves a group of entries in each category to create preview thumbnails
 	$filter = new KalturaMediaEntryFilter();
 	$filter->orderBy = KalturaMediaEntryOrderBy::CREATED_AT_DESC;
@@ -53,6 +72,8 @@ foreach($categories->objects as $category) {
 	}
 	$link .= '</div>';
 	$link .= '<div class="categoryName">'.$category->name.'</div>';
+	if($paidCategory)
+		$link .= '<img class="channelSigns" src="client/channeldollarsign.png">';
 	$link .= '</div>';
 	++$categoryCount;
 	$categoryLink = "<a class='categoryLink' rel='{$category->id}' >{$link}</a>";

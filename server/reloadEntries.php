@@ -107,6 +107,11 @@ foreach ($results->objects as $result) {
 	$pager->pageSize = 50;
 	$pager->pageIndex = 1;
 	$metaResults = $client->metadata->listAction($filter, $pager)->objects;
+	$categoryNames = explode(',', $result->categories);
+	$title = $name."\n"."Belongs to channel(s): ";
+	foreach($categoryNames as $categoryName)
+		$title .= $categoryName.', ';
+	$title = substr($title, 0, -2);
 	$display = "";
 	//If the entry is paid, display an icon over the thumbnail to indicate this
 	foreach($metaResults as $metaResult) {
@@ -114,7 +119,7 @@ foreach ($results->objects as $result) {
 		if($metadataProfile->name == 'PayPal (Entries)') {
 			$xml = simplexml_load_string($metaResult->xml);
 			if($xml->Paid == 'true')
-				$display =  $result->thumbnailUrl ? "<img width='120' height='68' id='thumb$count' style='background:url(".$result->thumbnailUrl.")' src='client/dollarsign.png' title='$name' >" : "<div>".$id." ".$name."</div>";
+				$display =  $result->thumbnailUrl ? '<img width="120" height="68" id="thumb'.$count.'" style="background:url('.$result->thumbnailUrl.')" src="client/dollarsign.png" title="'.$title.'" >' : '<div>'.$id.' '.$name.'</div>';
 		}
 	}
 	//If the entry is instead part of a paid channel, display an icon over the thumbnail to indicate this
@@ -135,14 +140,14 @@ foreach ($results->objects as $result) {
 					if($metadataProfile->name == 'PayPal (Categories)') {
 						$xml = simplexml_load_string($metaResult->xml);
 						if($xml->Paid == 'true')
-							$display =  $result->thumbnailUrl ? "<img width='120' height='68' id='thumb$count' style='background:url(".$result->thumbnailUrl.")' src='client/dollarsign.png' title='$name' >" : "<div>".$id." ".$name."</div>";
+							$display =  $result->thumbnailUrl ? '<img width="120" height="68" id="thumb'.$count.'" style="background:url('.$result->thumbnailUrl.')" src="client/dollarsign.png" title="'.$title.'" >' : '<div>'.$id.' '.$name.'</div>';
 					}
 				}
 			}
 		}
 	}
 	if($display == "")
-		$display =  $result->thumbnailUrl ? "<img width='120' height='68' id='thumb$count' style='background:url(".$result->thumbnailUrl.")' title='$name' >" : "<div>".$id." ".$name."</div>";
+		$display =  $result->thumbnailUrl ? '<img width="120" height="68" id="thumb'.$count.'" src="background:url('.$result->thumbnailUrl.')" title="'.$title.'" >' : '<div>'.$id.' '.$name.'</div>';;
 	$cats = $result->categoriesIds;
 	$thumbnail = "<a class='thumblink' rel='{$result->id}' cats='$cats' >{$display}</a>";	echo '<div class="float1">';
 		echo $thumbnail.'   ';

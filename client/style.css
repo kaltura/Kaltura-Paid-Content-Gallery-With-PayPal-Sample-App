@@ -142,3 +142,8 @@ div.clearCategory {
 	width: 380px;
 	height: 312px;
 }
+
+.channelSigns {
+	position: absolute;
+	margin-top: -59px;
+}

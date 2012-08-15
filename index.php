@@ -102,7 +102,7 @@ require_once('server/kalturaConfig.php');
 				if(msg == 'true')
 					verifySyncRes = true;
 			});
-			//This method verifies 
+			//This method verifies entries using HTML5 local storage
 			/*
 			pptransact.verify({
 				userId:'<?php echo $USER_ID; ?>',

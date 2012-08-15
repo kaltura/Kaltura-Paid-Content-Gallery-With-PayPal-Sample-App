@@ -69,10 +69,7 @@ require_once('server/kalturaConfig.php');
 				itemId:entryId,
 				itemQty:'1',
 				successCallback: function(ret) {
-					console.log(ret);
 					//bill success
-					$('#purchaseWindow').hide();
-					checkAccess(currentEntry, ret);
 					savePurchase(ret);
 				},
 				failCallback: function() {
@@ -87,7 +84,8 @@ require_once('server/kalturaConfig.php');
 				url: "server/savePurchase.php",
 				data: {id: ret}
 			}).done(function(msg) {
-				
+				$('#purchaseWindow').hide();
+				checkAccess(currentEntry, ret);
 			});
 		}
 
@@ -169,7 +167,6 @@ require_once('server/kalturaConfig.php');
 			}).done(function(msg) {
 				$('#entryLoadBar').hide();
 				$('body').unmask();
-				$('#purchaseWindow').show();
 				$('#entryList').html(msg);
 				//This is called whenever a video's thumbnail is clicked
 				$(".thumblink").click(function () {

@@ -35,7 +35,7 @@ class pptransact{
         $itemObj['qty'] = $qty;
         $dirRoot = sprintf("http://%s%s/", $_SERVER['SERVER_NAME'], dirname($_SERVER['PHP_SELF']));
         
-        $tax = round((.01 * $itemObj['taxamt'] * $itemObj['qty'] * $itemObj['amt']), 2, PHP_ROUND_HALF_UP);
+        $tax = round((.01 * $itemObj['taxamt'] * $itemObj['qty'] * $itemObj['amt']), 2);
         
         $postDetails = array('USER' => UID,
                              'PWD' => PASSWORD,
@@ -53,14 +53,14 @@ class pptransact{
                              'L_PAYMENTREQUEST_0_NUMBER0' => $itemObj['number'],
                              'L_PAYMENTREQUEST_0_QTY0' => $itemObj['qty'],
                              'L_PAYMENTREQUEST_0_AMT0' => $itemObj['amt'],
-        					 'L_PAYMENTREQUEST_0_TAXAMT0' => round((.01 * $itemObj['taxamt'] * $itemObj['amt']), 2, PHP_ROUND_HALF_UP),
+        					 'L_PAYMENTREQUEST_0_TAXAMT0' => round((.01 * $itemObj['taxamt'] * $itemObj['amt']), 2),
                              'PAYMENTREQUEST_0_SHIPPINGAMT' => "0",
                              'PAYMENTREQUEST_0_SHIPDISCAMT' => "0",
                              'PAYMENTREQUEST_0_INSURANCEAMT' => "0",
                              'PAYMENTREQUEST_0_PAYMENTACTION' => "sale",
                              'L_PAYMENTTYPE0' => "sale",
                              'PAYMENTREQUEST_0_CUSTOM' => sprintf("%s,%s", $this->userId, $itemObj['number']),
-                             'RETURNURL' => "{$dirRoot}success.php?data=" . round(($itemObj['qty'] * $itemObj['amt'] * (1 + .01 * $itemObj['taxamt'])), 2, PHP_ROUND_HALF_UP) . "|$userId|$itemId",
+                             'RETURNURL' => "{$dirRoot}success.php?data=" . round(($itemObj['qty'] * $itemObj['amt'] * (1 + .01 * $itemObj['taxamt'])), 2) . "|$userId|$itemId",
                              'CANCELURL' => "{$dirRoot}cancel.php");
         
         $arrPostVals = array_map(create_function('$key, $value', 'return $key."=".$value."&";'), array_keys($postDetails), array_values($postDetails));

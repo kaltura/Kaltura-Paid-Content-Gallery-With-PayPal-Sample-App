@@ -30,7 +30,7 @@ if(strtolower($_REQUEST['isChecked']) == 'true') {
 			$metadataProfile = $client->metadataProfile->get($metaResult->metadataProfileId);
 			if($metadataProfile->name == 'PayPal (Categories)') {
 				$xml = simplexml_load_string($metaResult->xml);
-				$xml->Paid = strtolower($_REQUEST['isChecked']);
+				$xml->Paid = 'true';
 				$xml->Price = (float) $_REQUEST['price'];
 				$xml->TaxPercent = (float) $_REQUEST['tax']; //This number should be a percent (0-100), does not have to be a whole number
 				$xml->CurrencyCode = (string) $_REQUEST['currency']; //This should follow the ISO 4217 standard
@@ -50,8 +50,8 @@ if(strtolower($_REQUEST['isChecked']) == 'true') {
 		if (count($results) > 0) {
 			//the schema is defined on this account, create a new metadata on this category:
 			//note: a smarter way would be to get the xsd and built this xml according to it...
-			$xml = simplexml_load_string('<metadata><Paid>true</Paid><Price></Price><TaxPercent></TaxPercent><CurrencyCode></CurrencyCode></metadata>');
-			$xml->Paid = strtolower($_REQUEST['isChecked']);
+			$xml = simplexml_load_string('<metadata><Paid></Paid><Price></Price><TaxPercent></TaxPercent><CurrencyCode></CurrencyCode></metadata>');
+			$xml->Paid = 'true';
 			$xml->Price = (float) $_REQUEST['price'];
 			$xml->TaxPercent = (float) $_REQUEST['tax']; //This number should be a percent (0-100), does not have to be a whole number
 			$xml->CurrencyCode = (string) $_REQUEST['currency']; //This should follow the ISO 4217 standard

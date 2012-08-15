@@ -61,6 +61,6 @@ foreach($categories->objects as $category) {
 //Creates a next page arrow if there are entries left to be displayed
 if($categories->totalCount > $pageSize * $_REQUEST['page']) {
 	$nextPage = $_REQUEST['page'] + 1;
-	echo '<div id="rightTriangle"><a class="categoryPage" rel="'.$nextPage.'" ><img src="client/triangle.png"></a></div>';
+	echo '<div id="rightTriangle"><a class="categoryPage" rel="'.$nextPage.'"><img src="client/triangle.png"></a></div>';
 }
 echo '<div class="clear"></div>';

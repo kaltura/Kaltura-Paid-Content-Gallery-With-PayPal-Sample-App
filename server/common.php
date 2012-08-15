@@ -23,10 +23,10 @@ function runCurl($url, $postVals = null) {
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_TIMEOUT => 3
     );
-    if ($postVals != null){
+    if ($postVals != null) {
         $options[CURLOPT_POSTFIELDS] = $postVals;
-        $options[CURLOPT_CUSTOMREQUEST] = "POST";  
-    }	
+        $options[CURLOPT_CUSTOMREQUEST] = "POST";
+    }
 	$header = array('X-PAYPAL-REQUEST-SOURCE' => 'HTML5 Toolkit PHP');
 	$options[CURLOPT_HTTPHEADER] = $header;
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);

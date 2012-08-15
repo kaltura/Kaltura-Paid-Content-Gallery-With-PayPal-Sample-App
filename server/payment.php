@@ -51,14 +51,16 @@ if($categoryList != '') {
 		foreach($metaResults as $metaResult) {
 			if($client->metadataProfile->get($metaResult->metadataProfileId)->name == 'PayPal (Categories)') {
 				$xml = simplexml_load_string($metaResult->xml);
-				$price = (float) $xml->Price;
-				$currencyCode = (string) $xml->CurrencyCode;
-				$tax = (float) $xml->TaxPercent;
-				echo 'You can '.$also.'watch this entry and more on:';
-				echo '<h2>'.$client->category->get(trim($category))->name.'</h2>';
-				echo '<button id="buyCategoryButton" type="button" onclick="bill('."'".trim($category)."'".')">Subscribe to this channel</button>';
-				echo ' for '.$currencyCode.' '.number_format($price * (1 + .01 * $tax), 2);
-				break 2;
+				if($xml->Paid == 'true') {
+					$price = (float) $xml->Price;
+					$currencyCode = (string) $xml->CurrencyCode;
+					$tax = (float) $xml->TaxPercent;
+					echo 'You can '.$also.'watch this entry and more on:';
+					echo '<h2>'.$client->category->get(trim($category))->name.'</h2>';
+					echo '<button id="buyCategoryButton" type="button" onclick="bill('."'".trim($category)."'".')">Subscribe to this channel</button>';
+					echo ' for '.$currencyCode.' '.number_format($price * (1 + .01 * $tax), 2);
+
+				}			
 			}
 		}
 	}

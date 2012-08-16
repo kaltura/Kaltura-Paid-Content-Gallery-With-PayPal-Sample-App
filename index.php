@@ -125,7 +125,6 @@ require_once('server/kalturaConfig.php');
 		
 		// Loads the video is a Kaltura Dynamic Player
 		function loadVideo(ks,uiConfId,entryId) {
-			/*
 			kWidget.embed({
 				'targetId': 'playerDiv',
 				'wid': '_<?php echo PARTNER_ID; ?>',
@@ -145,7 +144,6 @@ require_once('server/kalturaConfig.php');
 					kdp.addJsListener("freePreviewEnd", 'freePreviewEndHandler');
 				}
 			});
-			*/
 		}
 
 		//Responds to the page number index that is clicked

@@ -160,3 +160,7 @@ div.clearCategory {
 	margin-right: 8px;
 	font-weight: bold;
 }
+
+#welcomeMessage {
+	margin-bottom: 5px;
+}

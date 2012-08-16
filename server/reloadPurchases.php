@@ -30,7 +30,7 @@ else {
 	$i = 0;
 	$response = array();
 	$response[0] = '<div class="purchaseTitles">Videos: </div>';
-	$response[1] = '<div class="purchaseTitles">Categories: </div>';
+	$response[1] = '<div class="purchaseTitles">Channels: </div>';
 	foreach($xml as $field => $value) {
 		if($field == "PurchasedCategories") {
 			$count = 0;
@@ -86,6 +86,10 @@ else {
 			}
 		}
 	}
+	if(strcmp($response[0], '<div class="purchaseTitles">Videos: </div>') == 0)
+		$response[0] = '';
+	if(strcmp($response[1], '<div class="purchaseTitles">Channels: </div>') == 0)
+		$response[1] = '';
 	$response[1] .= '<div class="clear"></div>';
 	echo json_encode($response);
 }

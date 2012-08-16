@@ -279,7 +279,7 @@ require_once('server/kalturaConfig.php');
 				if(msg == 0)
 					$('#welcomeMessage').html('Welcome <?php echo $USER_ID; ?>, you have not purchased anything yet.');
 				else {
-					$('#welcomeMessage').html('Welcome <?php echo $USER_ID; ?>, you have previously bought the following items (see the <a href="javascript:showAllPurchases()">full list</a>):');
+					$('#welcomeMessage').html('Welcome <?php echo $USER_ID; ?>, you have previously bought the following items:');
 					var response = JSON && JSON.parse(msg) || $.parseJSON(msg);
 					$('#userVideos').html(response[0]);
 					$('#userChannels').html(response[1]);

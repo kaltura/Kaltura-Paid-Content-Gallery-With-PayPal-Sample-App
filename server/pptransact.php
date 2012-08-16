@@ -103,8 +103,8 @@ class pptransact{
             } else {
                 $response = parseString($response);
             }
-            $returnObj['transactionId'] = $response["PAYMENTINFO_0_TRANSACTIONID"];
-			$returnObj['orderTime'] = $response["PAYMENTINFO_0_ORDERTIME"];
+            //$returnObj['transactionId'] = $response["PAYMENTINFO_0_TRANSACTIONID"];
+			//$returnObj['orderTime'] = $response["PAYMENTINFO_0_ORDERTIME"];
 			$returnObj['paymentStatus'] = $response["PAYMENTINFO_0_PAYMENTSTATUS"];
 			$returnObj['itemId'] = $itemId;
 			$returnObj['userId'] = $userId;

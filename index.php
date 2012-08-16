@@ -9,12 +9,14 @@ require_once('server/kalturaConfig.php');
 	<!-- Style Includes -->
 	<link href="client/style.css" media="screen" rel="stylesheet" type="text/css" />
 	<link href="client/loadmask/jquery.loadmask.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="client/colorbox/example4/colorbox.css" />
 	<!-- Script Includes -->
 	<script src="https://www.paypalobjects.com/js/external/dg.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script src="client/pptransact.js"></script>
 	<script src="http://html5.kaltura.org/js"></script>
 	<script type="text/javascript" src="client/loadmask/jquery.loadmask.min.js"></script>
+	<script src="client/colorbox/colorbox/jquery.colorbox.js"></script>
 	<!-- Page Scripts -->
 	<script>
 		//are we loading the page or just calling ajax triggered by user interaction?
@@ -45,6 +47,7 @@ require_once('server/kalturaConfig.php');
 			}
 			else {
 				$('#failConfig').hide();
+				showPurchases();
 				//When the page loads, show the available channels
 				showCategories(1);
 				//When the page loads, show the entries
@@ -122,6 +125,7 @@ require_once('server/kalturaConfig.php');
 		
 		// Loads the video is a Kaltura Dynamic Player
 		function loadVideo(ks,uiConfId,entryId) {
+			/*
 			kWidget.embed({
 				'targetId': 'playerDiv',
 				'wid': '_<?php echo PARTNER_ID; ?>',
@@ -141,10 +145,11 @@ require_once('server/kalturaConfig.php');
 					kdp.addJsListener("freePreviewEnd", 'freePreviewEndHandler');
 				}
 			});
+			*/
 		}
 
 		//Responds to the page number index that is clicked
-		function pagerClicked (pageNumber, search, category)	{
+		function pagerClicked (pageNumber, search, category) {
 			currentPage = pageNumber;
 			showEntries(pageNumber, search, category);
 		}
@@ -174,6 +179,7 @@ require_once('server/kalturaConfig.php');
 					$('#purchaseWindow').html('');
 					currentEntry = $(this).attr('rel');
 					checkAccess($(this).attr('rel'), $(this).attr('cats'));
+					window.scrollTo(0,document.body.scrollHeight);
 			    });
 			    //Loads a video the first time the page loads
 			    if(firstload) {
@@ -266,6 +272,35 @@ require_once('server/kalturaConfig.php');
 			});
 		}
 
+		function showPurchases() {
+			$.ajax({
+				type: "POST",
+				url: "server/userPurchases.php",
+				data: {all: 'false'}
+			}).done(function(msg) {
+				if(msg == 0)
+					$('#welcomeMessage').html('Welcome <?php echo $USER_ID; ?>, you have not purchased anything yet.');
+				else {
+					$('#welcomeMessage').html('Welcome <?php echo $USER_ID; ?>, you have previously bought the following items (see the <a href="javascript:showAllPurchases()">full list</a>):');
+					var response = JSON && JSON.parse(msg) || $.parseJSON(msg);
+					$('#userVideos').html(response[0]);
+					$('#userChannels').html(response[1]);
+					//This is called whenever a video's thumbnail is clicked
+					$(".thumblink").click(function () {
+						$('#purchaseWindow').hide();
+						$('#purchaseWindow').html('');
+						currentEntry = $(this).attr('rel');
+						checkAccess($(this).attr('rel'), $(this).attr('cats'));
+						window.scrollTo(0,document.body.scrollHeight);
+				    });
+				}
+			});
+		}
+
+		function showAllPurchases() {
+			$.colorbox({width:"50%", href:"server/userPurchases.php?all=true"});
+		}
+
 		//This is shown when a video's free preview ends and a purchase
 		//is required to continue viewing the content
 		function showPurchaseWindow(entryId) {
@@ -304,6 +339,12 @@ require_once('server/kalturaConfig.php');
 		<div><img src="client/loadBar.gif" style="display: none;" id="loadBar"></div>
 		<h1>Kaltura Paid-Content Gallery Sample App</h1>
 		<div class="notep"><strong>This application is using a Sandbox PayPal demo account.</strong> All pay-videos are set with a 10sec free preview.<br/>To purchase, use the following credentials - user: <span class="italicbold">john_1344640136_per@kaltura.com</span> &nbsp; pass: <span class="italicbold">kaltura2012</span></div>
+		<div id="userDiv">
+			<div id="welcomeMessage">Welcome <?php echo $USER_ID; ?></div>
+			<div id="userVideos" style="float: left;"></div>
+			<div id="userChannels"></div>
+			<div id="viewPurchases"></div>
+		</div>
 		<div class="searchDiv">
 			Search by name, description, or tags: <input type="text" id="searchBar" autofocus="autofocus">
 			<button id="searchButton" class="searchButtonClass" type="button" onclick="showEntries()">Search</button>

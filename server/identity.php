@@ -17,9 +17,9 @@ function getUserId() {
 function recordPayment($paymentObj = "") {
     $userId = $paymentObj["userId"];
     $itemId = $paymentObj["itemId"];
-    $transactionId = $paymentObj["transactionId"];
+    //$transactionId = $paymentObj["transactionId"];
     $paymentStatus = $paymentObj["paymentStatus"];
-    $orderTime = $paymentObj["orderTime"];
+    //$orderTime = $paymentObj["orderTime"];
 }
     
 function verifyPayment($userId = 0, $itemId = 0) {

@@ -7,7 +7,6 @@ body, html {
  	font-size: 14px;
  	line-height: 24px;
  	font-family: "Trebuchet MS", Helvetica, Sans-Serif;
- 	height: 97%;
 }
 
 div.notep {
@@ -146,4 +145,12 @@ div.clearCategory {
 .channelSigns {
 	position: absolute;
 	margin-top: -59px;
+}
+
+#userDiv {
+	margin-bottom: 15px;
+}
+
+.thumblink {
+	cursor: pointer;
 }

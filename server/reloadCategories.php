@@ -76,7 +76,7 @@ foreach($categories->objects as $category) {
 		$link .= '<img class="channelSigns" src="client/channeldollarsign.png">';
 	$link .= '</div>';
 	++$categoryCount;
-	$categoryLink = "<a class='categoryLink' rel='{$category->id}' >{$link}</a>";
+	$categoryLink = "<a class='categoryLink' rel='{$category->id}'>{$link}</a>";
 	echo $categoryLink;
 }
 //Creates a next page arrow if there are entries left to be displayed

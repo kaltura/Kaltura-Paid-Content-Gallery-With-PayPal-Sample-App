@@ -101,7 +101,6 @@ foreach ($results->objects as $result) {
 	$type = $result->mediaType;
 	$id = $result->id;
 	$filter = new KalturaMetadataFilter();
-	$filter->orderBy = '';
 	$filter->objectIdEqual = $id;
 	$pager = new KalturaFilterPager();
 	$pager->pageSize = 50;
@@ -147,7 +146,7 @@ foreach ($results->objects as $result) {
 		}
 	}
 	if($display == "")
-		$display =  $result->thumbnailUrl ? '<img width="120" height="68" id="thumb'.$count.'" src="background:url('.$result->thumbnailUrl.')" title="'.$title.'" >' : '<div>'.$id.' '.$name.'</div>';;
+		$display =  $result->thumbnailUrl ? '<img width="120" height="68" id="thumb'.$count.'" src="'.$result->thumbnailUrl.'" title="'.$title.'" >' : '<div>'.$id.' '.$name.'</div>';
 	$cats = $result->categoriesIds;
 	$thumbnail = "<a class='thumblink' rel='{$result->id}' cats='$cats' >{$display}</a>";	echo '<div class="float1">';
 		echo $thumbnail.'   ';

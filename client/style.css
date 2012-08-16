@@ -154,3 +154,9 @@ div.clearCategory {
 .thumblink {
 	cursor: pointer;
 }
+
+.purchaseTitles {
+	float: left;
+	margin-right: 8px;
+	font-weight: bold;
+}

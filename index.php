@@ -275,7 +275,7 @@ require_once('server/kalturaConfig.php');
 		function showPurchases() {
 			$.ajax({
 				type: "POST",
-				url: "server/userPurchases.php",
+				url: "server/reloadPurchases.php",
 				data: {all: 'false'}
 			}).done(function(msg) {
 				if(msg == 0)

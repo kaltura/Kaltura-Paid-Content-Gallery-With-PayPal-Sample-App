@@ -58,13 +58,13 @@ foreach($categories->objects as $category) {
 	$entries = $client->media->listAction($filter, $pager)->objects;
 	$count = 0;
 	$link = "";
-	$link .= '<div id="'.$category->id.'" class="categories">';
+	$link .= '<div id="'.$category->id.'" class="categories" title="'.$category->name.'">';
 	$link .= '<div class="category">';
 	foreach($entries as $categoryEntry) {
 		$id = $categoryEntry->id;
 		$entry = $client->media->get($id);
 		$name = $entry->name;
-		$display =  "<img width='30' height='17' src='".$entry->thumbnailUrl."' title='".$id." ".$name."' >";
+		$display =  "<img width='30' height='17' src='".$entry->thumbnailUrl."'>";
 		$link .= $display;
 		++$count;
 		if($count == 3)

@@ -25,6 +25,8 @@ require_once('server/kalturaConfig.php');
 		var currentPage = 1;
 		//Keeps track of the video being viewed
 		var currentEntry = 0;
+		//Used to track the entry link
+		var entryId = 0;
 		//Keeps track of the search terms
 		var currentSearch = "";
 		//Keeps track of the channel being viewed
@@ -175,12 +177,18 @@ require_once('server/kalturaConfig.php');
 				$(".thumblink").click(function () {
 					$('#purchaseWindow').hide();
 					$('#purchaseWindow').html('');
+					if(entryId != 0)
+						entryId.css('opacity', '1');
+					entryId = $(this);
+					$(this).css('opacity', '0.50');
 					currentEntry = $(this).attr('rel');
 					checkAccess($(this).attr('rel'), $(this).attr('cats'));
 					window.scrollTo(0,document.body.scrollHeight);
 			    });
 			    //Loads a video the first time the page loads
 			    if(firstload) {
+			    	entryId = $('#entryList').find('.thumblink:first');
+			    	$('#entryList').find('.thumblink:first').css('opacity', '0.50');
 				    currentEntry = $('.thumblink:first').attr('rel');
 				    checkAccess($('.thumblink:first').attr('rel'), $('.thumblink:first').attr('cats'));
 					firstload = false;
@@ -287,6 +295,10 @@ require_once('server/kalturaConfig.php');
 					$(".thumblink").click(function () {
 						$('#purchaseWindow').hide();
 						$('#purchaseWindow').html('');
+						if(entryId != 0)
+							entryId.css('opacity', '1');
+						entryId = $(this);
+						$(this).css('opacity', '0.50');
 						currentEntry = $(this).attr('rel');
 						checkAccess($(this).attr('rel'), $(this).attr('cats'));
 						window.scrollTo(0,document.body.scrollHeight);
@@ -364,5 +376,6 @@ require_once('server/kalturaConfig.php');
 		</div>
 	</div>
 	<div id="purchaseWindow"></div>
+	<div id="entryHighlight"></div>
 </body>
 </html>

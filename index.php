@@ -279,7 +279,7 @@ require_once('server/kalturaConfig.php');
 				if(msg == 0)
 					$('#welcomeMessage').html('Welcome <?php echo $USER_ID; ?>, you have not purchased anything yet.');
 				else {
-					$('#welcomeMessage').html('Welcome <?php echo $USER_ID; ?>, you have previously bought the following items:');
+					$('#welcomeMessage').html('Welcome <?php echo $USER_ID; ?>, you have previously bought the following items (see the <a href="javascript:showAllPurchases()">full list</a>):');
 					var response = JSON && JSON.parse(msg) || $.parseJSON(msg);
 					$('#userVideos').html(response[0]);
 					$('#userChannels').html(response[1]);
@@ -296,6 +296,7 @@ require_once('server/kalturaConfig.php');
 		}
 
 		function showAllPurchases() {
+			window.scrollTo(0,document.body.scrollHeight);
 			$.colorbox({width:"50%", href:"server/userPurchases.php?all=true"});
 		}
 
@@ -359,7 +360,7 @@ require_once('server/kalturaConfig.php');
 		<div id="playerDivContainer"><div id="playerDiv"></div></div>
 		<div id="clearDiv" style="clear:both"></div>
 		<div id="adminDiv">
-			<button id="adminButton" type="button" onclick="location.href='AccountWizard'">Admin Account Wizard</button>
+			<button id="adminButton" type="button" onclick="location.href='AccountWizard'" style="margin-bottom: 11px; margin-left: -2px;">Admin Account Wizard</button>
 		</div>
 	</div>
 	<div id="purchaseWindow"></div>

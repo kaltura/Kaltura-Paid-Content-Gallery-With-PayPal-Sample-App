@@ -1,6 +1,6 @@
 <?php
 set_time_limit(0);
-//Creates the list of channels that can be browsed
+//Shows a preview of the content that the user has purchased
 require_once("kalturaConfig.php");
 //Includes the client library and starts a Kaltura session to access the API
 //More informatation about this process can be found at

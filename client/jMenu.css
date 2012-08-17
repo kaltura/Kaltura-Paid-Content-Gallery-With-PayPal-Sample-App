@@ -1,0 +1,37 @@
+@CHARSET "ISO-8859-1";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.accordian {
+	margin: 1px auto;
+}
+
+.accordian li {
+	list-style-type: none;
+	padding: 0 5px;
+}
+
+.dimension {
+	height: 400px;
+}
+
+.even, .odd {
+	font-weight: bold;
+	height: 27px;
+	padding-top: 3px;
+	padding-left: 10px;
+}
+
+.even {
+	border: 1px solid #d8d8d8;
+	background-color: #ececec;
+}
+
+.odd {
+	border: 1px solid black;
+	background: #333;
+	color: white;
+}

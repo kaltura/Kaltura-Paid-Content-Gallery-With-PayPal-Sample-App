@@ -164,3 +164,19 @@ div.clearCategory {
 #welcomeMessage {
 	margin-bottom: 5px;
 }
+
+div.userCategories {
+	float: left;
+	margin-right: 7px;
+	margin-bottom: 7px;
+	border: 1px solid black;
+	width: 120px;
+	height: 66px;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+div.userCategory {
+	line-height: 0px;
+	height: 46px;
+}

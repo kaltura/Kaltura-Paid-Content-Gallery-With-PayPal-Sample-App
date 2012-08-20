@@ -1,6 +1,6 @@
 <?php
 //This script displays all the available entries on the account
-
+set_time_limit(0);
 //Includes the client library and starts a Kaltura session to access the API
 //More informatation about this process can be found at
 //http://knowledge.kaltura.com/introduction-kaltura-client-libraries
@@ -9,6 +9,36 @@ $config = new KalturaConfiguration($_REQUEST['partnerId']);
 $config->serviceUrl = 'http://www.kaltura.com/';
 $client = new KalturaClient($config);
 $client->setKs($_REQUEST['session']);
+
+$filter = new KalturaMetadataProfileFilter();
+$filter->orderBy = '-createdAt';
+$filter->nameEqual = 'PayPal (Entries)';
+$pager = new KalturaFilterPager();
+$pager->pageSize = 1;
+$pager->pageIndex = 1;
+$results = $client->metadataProfile->listAction($filter, $pager)->objects;
+$entryProfile = 0;
+if(count($results) == 0) {
+	echo 'You must setup your account to have the PayPal (Entries) metadata profile using the Account Wizard before you can set pricing';
+	die();
+}
+else
+	$entryProfile = $results[0]->id;
+
+$filter = new KalturaMetadataProfileFilter();
+$filter->orderBy = '-createdAt';
+$filter->nameEqual = 'PayPal (Categories)';
+$pager = new KalturaFilterPager();
+$pager->pageSize = 1;
+$pager->pageIndex = 1;
+$results = $client->metadataProfile->listAction($filter, $pager)->objects;
+$categoryProfile = 0;
+if(count($results) == 0) {
+	echo 'You must setup your account to have the PayPal (Categories) metadata profile using the Account Wizard before you can set pricing';
+	die();
+}
+else
+	$categoryProfile = $results[0]->id;
 
 //Filters the entries so that they are ordered by descending creation order
 //In other words, the newer videos show up on the front page
@@ -102,47 +132,46 @@ foreach ($results->objects as $result) {
 	$name = $result->name;
 	$type = $result->mediaType;
 	$id = $result->id;
-	$filter = new KalturaMetadataFilter();
-	$filter->orderBy = '-createdAt';
-	$filter->objectIdEqual = $id;
-	$pager = new KalturaFilterPager();
-	$pager->pageSize = 50;
-	$pager->pageIndex = 1;
-	$metaResults = $client->metadata->listAction($filter, $pager)->objects;
 	$display = "";
-	//If the entry is paid, display an icon over the thumbnail to indicate this
-	foreach($metaResults as $metaResult) {
-		$metadataProfile = $client->metadataProfile->get($metaResult->metadataProfileId);
-		if($metadataProfile->name == 'PayPal (Entries)') {
-			$xml = simplexml_load_string($metaResult->xml);
-			if($xml->Paid == 'true')
-				$display =  $result->thumbnailUrl ? "<img width='120' height='68' id='thumb$count' style='background:url(".$result->thumbnailUrl.")' src='lib/dollarsign.png' title='$name' >" : "<div>".$id." ".$name."</div>";
-		}
-	}
+	$filter = new KalturaMediaEntryFilter();
+	$filter->idEqual = $result->id;
+	$pager = new KalturaFilterPager();
+	$pager->pageSize = 1;
+	$pager->pageIndex = 1;
+	$filterAdvancedSearch = new KalturaMetadataSearchItem();
+	$filterAdvancedSearch->type = KalturaSearchOperatorType::SEARCH_AND;
+	$filterAdvancedSearch->metadataProfileId = $entryProfile;
+	$filterAdvancedSearchItems = array();
+	$filterAdvancedSearchItems0 = new KalturaSearchCondition();
+	$filterAdvancedSearchItems0->field = "/*[local-name()='metadata']/*[local-name()='Paid']";
+	$filterAdvancedSearchItems0->value = 'true';
+	$filterAdvancedSearchItems[0] = $filterAdvancedSearchItems0;
+	$filterAdvancedSearch->items = $filterAdvancedSearchItems;
+	$filter->advancedSearch = $filterAdvancedSearch;
+	$entryPaid = $client->media->listAction($filter, $pager)->objects;
+	if(count($entryPaid) > 0)
+		$display =  $result->thumbnailUrl ? "<img width='120' height='68' id='thumb$count' style='background:url(".$result->thumbnailUrl.")' src='lib/dollarsign.png' title='$name' >" : "<div>".$id." ".$name."</div>";
 	//If the entry is instead part of a paid channel, display an icon over the thumbnail to indicate this
 	if($display == "") {
 		$categories = explode(',', $result->categoriesIds);
-		foreach($categories as $category) {
-			if($category != "") {
-				$filter = new KalturaMetadataFilter();
-				$filter->metadataObjectTypeEqual = KalturaMetadataObjectType::CATEGORY;
-				$filter->objectIdEqual = $category;
-				$pager = new KalturaFilterPager();
-				$pager->pageSize = 500;
-				$pager->pageIndex = 1;
-				$metadataPlugin = KalturaMetadataClientPlugin::get($client);
-				$metaResults = $metadataPlugin->metadata->listAction($filter, $pager)->objects;
-				foreach($metaResults as $metaResult) {
-					$metadataProfile = $client->metadataProfile->get($metaResult->metadataProfileId);
-					if($metadataProfile->name == 'PayPal (Categories)') {
-						$xml = simplexml_load_string($metaResult->xml);
-						if($xml->Paid == 'true')
-							$display =  $result->thumbnailUrl ? "<img width='120' height='68' id='thumb$count' style='background:url(".$result->thumbnailUrl.")' src='lib/dollarsign.png' title='$name' >" : "<div>".$id." ".$name."</div>";
-						break 2;
-					}
-				}
-			}
-		}
+		$filter = new KalturaCategoryFilter();
+		$filter->idIn = $result->categoriesIds;
+		$pager = new KalturaFilterPager();
+		$pager->pageSize = 1;
+		$pager->pageIndex = 1;
+		$filterAdvancedSearch = new KalturaMetadataSearchItem();
+		$filterAdvancedSearch->type = KalturaSearchOperatorType::SEARCH_AND;
+		$filterAdvancedSearch->metadataProfileId = $categoryProfile;
+		$filterAdvancedSearchItems = array();
+		$filterAdvancedSearchItems0 = new KalturaSearchCondition();
+		$filterAdvancedSearchItems0->field = "/*[local-name()='metadata']/*[local-name()='Paid']";
+		$filterAdvancedSearchItems0->value = 'true';
+		$filterAdvancedSearchItems[0] = $filterAdvancedSearchItems0;
+		$filterAdvancedSearch->items = $filterAdvancedSearchItems;
+		$filter->advancedSearch = $filterAdvancedSearch;
+		$categoryPaid = $client->category->listAction($filter, $pager)->objects;
+		if(count($categoryPaid) > 0)
+			$display =  $result->thumbnailUrl ? "<img width='120' height='68' id='thumb$count' style='background:url(".$result->thumbnailUrl.")' src='lib/dollarsign.png' title='$name' >" : "<div>".$id." ".$name."</div>";
 	}
 	if($display == "")
 		$display =  $result->thumbnailUrl ? "<img width='120' height='68' id='thumb$count' style='background:url(".$result->thumbnailUrl.")' title='$name' >" : "<div>".$id." ".$name."</div>";

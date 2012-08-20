@@ -292,9 +292,7 @@ require_once('server/kalturaConfig.php');
 				url: "server/reloadPurchases.php",
 				data: {all: 'false'}
 			}).done(function(msg) {
-				if(msg == 0)
-					break;
-				else {
+				if(msg != 0) {
 					var response = JSON && JSON.parse(msg) || $.parseJSON(msg);
 					$('#userVideos').html(response[0]);
 					$('#userChannels').html(response[1]);

@@ -397,7 +397,7 @@ require_once('server/kalturaConfig.php');
 					To purchase, use the following credentials - user: <span class="italicbold">john_1344640136_per@kaltura.com</span> &nbsp; pass: <span class="italicbold">kaltura2012</span>
 				</li>
 				<li>
-					For the purposes of the demo, this application creates new users based on the client IP address and/or machine name. In a production environment it is encouraged to create an actual user registration system.
+					For the purposes of the demo, the application creates new users based on the client IP address and stores it as a browser cookie. In a production environment it is encouraged to create an actual user registration system.
 				</li>
 			</ul>
 		</div>

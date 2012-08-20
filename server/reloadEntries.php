@@ -113,37 +113,45 @@ foreach ($results->objects as $result) {
 	$title = substr($title, 0, -2);
 	$display = "";
 	//If the entry is paid, display an icon over the thumbnail to indicate this
-	foreach($metaResults as $metaResult) {
-		$metadataProfile = $client->metadataProfile->get($metaResult->metadataProfileId);
-		if($metadataProfile->name == 'PayPal (Entries)') {
-			$xml = simplexml_load_string($metaResult->xml);
-			if($xml->Paid == 'true')
-				$display =  $result->thumbnailUrl ? '<img width="120" height="68" id="thumb'.$count.'" style="background:url('.$result->thumbnailUrl.')" src="client/premiumentry.png" title="'.$title.'" >' : '<div>'.$id.' '.$name.'</div>';
-		}
-	}
+	$filter = new KalturaMediaEntryFilter();
+	$filter->idEqual = $result->id;
+	$pager = new KalturaFilterPager();
+	$pager->pageSize = 1;
+	$pager->pageIndex = 1;
+	$filterAdvancedSearch = new KalturaMetadataSearchItem();
+	$filterAdvancedSearch->type = KalturaSearchOperatorType::SEARCH_AND;
+	$filterAdvancedSearch->metadataProfileId = PAYPAL_METADATA_PROFILE_ID;
+	$filterAdvancedSearchItems = array();
+	$filterAdvancedSearchItems0 = new KalturaSearchCondition();
+	$filterAdvancedSearchItems0->field = "/*[local-name()='metadata']/*[local-name()='Paid']";
+	$filterAdvancedSearchItems0->value = 'true';
+	$filterAdvancedSearchItems[0] = $filterAdvancedSearchItems0;
+	$filterAdvancedSearch->items = $filterAdvancedSearchItems;
+	$filter->advancedSearch = $filterAdvancedSearch;
+	$results = $client->media->listAction($filter, $pager)->objects;
+	if(count($results) > 0)
+		$display =  $result->thumbnailUrl ? '<img width="120" height="68" id="thumb'.$count.'" style="background:url('.$result->thumbnailUrl.')" src="client/premiumentry.png" title="'.$title.'" >' : '<div>'.$id.' '.$name.'</div>';
 	//If the entry is instead part of a paid channel, display an icon over the thumbnail to indicate this
 	if($display == "") {
 		$categories = explode(',', $result->categoriesIds);
-		foreach($categories as $category) {
-			if($category != "") {
-				$filter = new KalturaMetadataFilter();
-				$filter->metadataObjectTypeEqual = KalturaMetadataObjectType::CATEGORY;
-				$filter->objectIdEqual = $category;
-				$pager = new KalturaFilterPager();
-				$pager->pageSize = 500;
-				$pager->pageIndex = 1;
-				$metadataPlugin = KalturaMetadataClientPlugin::get($client);
-				$metaResults = $metadataPlugin->metadata->listAction($filter, $pager)->objects;
-				foreach($metaResults as $metaResult) {
-					$metadataProfile = $client->metadataProfile->get($metaResult->metadataProfileId);
-					if($metadataProfile->name == 'PayPal (Categories)') {
-						$xml = simplexml_load_string($metaResult->xml);
-						if($xml->Paid == 'true')
-							$display =  $result->thumbnailUrl ? '<img width="120" height="68" id="thumb'.$count.'" style="background:url('.$result->thumbnailUrl.')" src="client/premiumentry.png" title="'.$title.'" >' : '<div>'.$id.' '.$name.'</div>';
-					}
-				}
-			}
-		}
+		$filter = new KalturaCategoryFilter();
+		$filter->idIn = $result->categoriesIds;
+		$pager = new KalturaFilterPager();
+		$pager->pageSize = 1;
+		$pager->pageIndex = 1;
+		$filterAdvancedSearch = new KalturaMetadataSearchItem();
+		$filterAdvancedSearch->type = KalturaSearchOperatorType::SEARCH_AND;
+		$filterAdvancedSearch->metadataProfileId = PAYPAL_CATEGORY_METADATA_PROFILE_ID;
+		$filterAdvancedSearchItems = array();
+		$filterAdvancedSearchItems0 = new KalturaSearchCondition();
+		$filterAdvancedSearchItems0->field = "/*[local-name()='metadata']/*[local-name()='Paid']";
+		$filterAdvancedSearchItems0->value = 'true';
+		$filterAdvancedSearchItems[0] = $filterAdvancedSearchItems0;
+		$filterAdvancedSearch->items = $filterAdvancedSearchItems;
+		$filter->advancedSearch = $filterAdvancedSearch;
+		$results = $client->category->listAction($filter, $pager)->objects;
+		if(count($results) > 0)
+			$display =  $result->thumbnailUrl ? '<img width="120" height="68" id="thumb'.$count.'" style="background:url('.$result->thumbnailUrl.')" src="client/premiumentry.png" title="'.$title.'" >' : '<div>'.$id.' '.$name.'</div>';
 	}
 	if($display == "")
 		$display =  $result->thumbnailUrl ? '<img width="120" height="68" id="thumb'.$count.'" src="'.$result->thumbnailUrl.'" title="'.$title.'" >' : '<div>'.$id.' '.$name.'</div>';

@@ -356,7 +356,7 @@ require_once('server/kalturaConfig.php');
 		<div><img src="client/loadBar.gif" style="display: none;" id="loadBar"></div>
 		<h1>Kaltura Paid-Content Gallery Sample App</h1>
 		<div id="userDiv">
-			<div id="welcomeMessage">Welcome <?php echo $USER_ID; ?>,
+			<div id="welcomeMessage">Welcome <span class="userid" title="This is a demo user, see note at the bottom of the page for more information."><?php echo $USER_ID; ?></span>,
 				<ul style="margin: 0;">
 					<li>
 						<a href="javascript:showAllPurchases()">Click here to see your purchased videos and channels</a>
@@ -397,7 +397,7 @@ require_once('server/kalturaConfig.php');
 					To purchase, use the following credentials - user: <span class="italicbold">john_1344640136_per@kaltura.com</span> &nbsp; pass: <span class="italicbold">kaltura2012</span>
 				</li>
 				<li>
-					For the purposes of the demo, this application creates new users based on their IP address. In a production environment it is encouraged to create an actual user registration system.
+					For the purposes of the demo, this application creates new users based on the client IP address and/or machine name. In a production environment it is encouraged to create an actual user registration system.
 				</li>
 			</ul>
 		</div>

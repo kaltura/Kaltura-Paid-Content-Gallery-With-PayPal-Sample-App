@@ -89,6 +89,7 @@
 				if(categoryId != 0)
 					categoryId.css('borderColor', 'black');
 				currentCategory = $(this).attr('rel');
+				$('#searchText').text('Search "' + $(this).children().attr('title') + '" by name, description, or tags: ');
 				showEntries(1, '', currentCategory);
 				var arr = $('#categoryList').children('.categoryLink');
 				for(var i = 0; i < arr.length; ++i) {

@@ -157,10 +157,12 @@ require_once('server/kalturaConfig.php');
 		//Show all the entries for a given page based on the channel and search terms or lack thereof
 		function showEntries(page, terms, cat) {
 			$('#purchaseWindow').hide();
+			//If displaying all categories, nullify any effects that clicking a specific channel creates
 			if(cat == "") {
-				currentCategory = cat;
+				currentCategory = '';
 				if(categoryId != 0)
 					categoryId.css('borderColor', 'black');
+				$('#searchText').text('Search all channels by name, description, or tags: ');
 			}
 			if(!cat)
 				cat = currentCategory;
@@ -217,6 +219,7 @@ require_once('server/kalturaConfig.php');
 					categoryId = $(this).children();
 					$(this).children().css('borderColor', 'blue');
 					currentCategory = $(this).attr('rel');
+					$('#searchText').text('Search "' + $(this).children().attr('title') + '" by name, description, or tags: ');
 					showEntries(1, currentSearch, currentCategory);
 				});
 				//Shows more channels to choose from
@@ -360,7 +363,7 @@ require_once('server/kalturaConfig.php');
 			<div id="viewPurchases"></div>
 		</div>
 		<div class="searchDiv">
-			Search by name, description, or tags: <input type="text" id="searchBar" autofocus="autofocus">
+			<span id="searchText">Search all channels by name, description, or tags: </span><input type="text" id="searchBar" autofocus="autofocus">
 			<button id="searchButton" class="searchButtonClass" type="button" onclick="showEntries()">Search</button>
 			<button id="showButton" type="button" onclick="showEntries(1, '', '')">Show All</button>
 		</div>

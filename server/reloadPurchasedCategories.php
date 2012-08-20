@@ -1,4 +1,5 @@
 <?php
+//This script reloads the categories that the user has already purchased
 set_time_limit(0);
 //Displays all the entries that the user has purchased
 require_once("kalturaConfig.php");
@@ -133,8 +134,9 @@ foreach($categories->objects as $category) {
 	$link .= '<div class="categoryName">'.$category->name.'</div>';
 	$link .= '</div>';
 	++$categoryCount;
-	$categoryLink = "<a class='categoryLink' rel='{$category->id}'>{$link}</a>";
+	$categoryLink = "<a class='userCategoryLink' rel='{$category->id}'>{$link}</a>";
 	echo $categoryLink;
+	//Only display 4 categories per row
 	if($categoryCount > 0 && ($categoryCount) % 4 == 0)
 		echo '<div style="clear: both;"></div>';
 }

@@ -157,8 +157,11 @@ require_once('server/kalturaConfig.php');
 		//Show all the entries for a given page based on the channel and search terms or lack thereof
 		function showEntries(page, terms, cat) {
 			$('#purchaseWindow').hide();
-			if(cat == "")
+			if(cat == "") {
 				currentCategory = cat;
+				if(categoryId != 0)
+					categoryId.css('borderColor', 'black');
+			}
 			if(!cat)
 				cat = currentCategory;
 			if(terms == "")
@@ -187,10 +190,10 @@ require_once('server/kalturaConfig.php');
 			    });
 			    //Loads a video the first time the page loads
 			    if(firstload) {
-			    	entryId = $('#entryList').find('.thumblink:first');
-			    	$('#entryList').find('.thumblink:first').css('opacity', '0.50');
-				    currentEntry = $('.thumblink:first').attr('rel');
-				    checkAccess($('.thumblink:first').attr('rel'), $('.thumblink:first').attr('cats'));
+					entryId = $('#entryList').find('.thumblink:first');
+					entryId.css('opacity', '0.50');
+					currentEntry = entryId.attr('rel');
+					checkAccess(entryId.attr('rel'), entryId.attr('cats'));
 					firstload = false;
 			    }
 			});

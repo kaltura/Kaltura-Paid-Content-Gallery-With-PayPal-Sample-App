@@ -1,4 +1,5 @@
 <?php
+//This script reloads the categories that the user has already purchased
 set_time_limit(0);
 //Displays all the entries that the user has purchased
 require_once("kalturaConfig.php");
@@ -124,7 +125,7 @@ foreach ($results->objects as $result) {
 	$title = substr($title, 0, -2);
 	$display =  $result->thumbnailUrl ? '<img width="120" height="68" id="thumb'.$count.'" src="'.$result->thumbnailUrl.'" title="'.$title.'" >' : '<div>'.$id.' '.$name.'</div>';
 	$cats = $result->categoriesIds;
-	$thumbnail = "<a class='thumblink' rel='{$result->id}' cats='$cats' >{$display}</a>";
+	$thumbnail = "<a class='userthumblink' rel='{$result->id}' cats='$cats' >{$display}</a>";
 	echo '<div class="float1" style="margin-right: 7px;">';
 	echo $thumbnail;
 	echo '</div>';

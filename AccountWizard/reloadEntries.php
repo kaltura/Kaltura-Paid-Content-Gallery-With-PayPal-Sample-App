@@ -150,7 +150,7 @@ foreach ($results->objects as $result) {
 	$filter->advancedSearch = $filterAdvancedSearch;
 	$entryPaid = $client->media->listAction($filter, $pager)->objects;
 	if(count($entryPaid) > 0)
-		$display =  $result->thumbnailUrl ? "<img width='120' height='68' id='thumb$count' style='background:url(".$result->thumbnailUrl.")' src='lib/dollarsign.png' title='$name' >" : "<div>".$id." ".$name."</div>";
+		$display =  $result->thumbnailUrl ? "<img width='120' height='68' id='thumb$count' style='background:url(".$result->thumbnailUrl.")' src='lib/premiumentry.png' title='$name' >" : "<div>".$id." ".$name."</div>";
 	//If the entry is instead part of a paid channel, display an icon over the thumbnail to indicate this
 	if($display == "") {
 		$categories = explode(',', $result->categoriesIds);
@@ -171,7 +171,7 @@ foreach ($results->objects as $result) {
 		$filter->advancedSearch = $filterAdvancedSearch;
 		$categoryPaid = $client->category->listAction($filter, $pager)->objects;
 		if(count($categoryPaid) > 0)
-			$display =  $result->thumbnailUrl ? "<img width='120' height='68' id='thumb$count' style='background:url(".$result->thumbnailUrl.")' src='lib/dollarsign.png' title='$name' >" : "<div>".$id." ".$name."</div>";
+			$display =  $result->thumbnailUrl ? "<img width='120' height='68' id='thumb$count' style='background:url(".$result->thumbnailUrl.")' src='lib/premiumentry.png' title='$name' >" : "<div>".$id." ".$name."</div>";
 	}
 	if($display == "")
 		$display =  $result->thumbnailUrl ? "<img width='120' height='68' id='thumb$count' style='background:url(".$result->thumbnailUrl.")' title='$name' >" : "<div>".$id." ".$name."</div>";

@@ -69,7 +69,15 @@ function getRealIpAddr() {
 	}
 	return $ip;
 }
-$USER_ID =  implode('_', explode(':', gethostname().'_'.getRealIpAddr()));
+if(isset($_COOKIE['kaypaluserid']) && $_COOKIE['kaypaluserid'] != "") {
+	$USER_ID = $_COOKIE['kaypaluserid'];
+}
+else {
+	$expire=time()+60*60*24*365;
+	$user = implode('_', explode(':','demo_user_'.mt_rand(1, 9999999).getRealIpAddr()));
+	setcookie('kaypaluserid', $user, $expire);
+	$USER_ID = $user;
+}
 <?php 
 file_put_contents('../server/kalturaConfig.php', ob_get_contents());
 ob_end_flush();

@@ -1,4 +1,4 @@
-<?php
+<?php 
 // To get started with Kaltura, you need an acccount.
 // Get a free trial at: http://corp.kaltura.com
 // In your Kaltura account, get the partner Id and API Admin Secret from:
@@ -27,4 +27,12 @@ function getRealIpAddr() {
 	}
 	return $ip;
 }
-$USER_ID =  implode('_', explode(':', gethostname().'_'.getRealIpAddr()));
+if(isset($_COOKIE['kaypaluserid']) && $_COOKIE['kaypaluserid'] != "") {
+	$USER_ID = $_COOKIE['kaypaluserid'];
+}
+else {
+	$expire=time()+60*60*24*365;
+	$user = implode('_', explode(':','demo_user_'.mt_rand(1, 9999999).getRealIpAddr()));
+	setcookie('kaypaluserid', $user, $expire);
+	$USER_ID = $user;
+}

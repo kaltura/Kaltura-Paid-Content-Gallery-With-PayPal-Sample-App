@@ -118,7 +118,7 @@ foreach ($results->objects as $result) {
 		if($metadataProfile->name == 'PayPal (Entries)') {
 			$xml = simplexml_load_string($metaResult->xml);
 			if($xml->Paid == 'true')
-				$display =  $result->thumbnailUrl ? '<img width="120" height="68" id="thumb'.$count.'" style="background:url('.$result->thumbnailUrl.')" src="client/dollarsign.png" title="'.$title.'" >' : '<div>'.$id.' '.$name.'</div>';
+				$display =  $result->thumbnailUrl ? '<img width="120" height="68" id="thumb'.$count.'" style="background:url('.$result->thumbnailUrl.')" src="client/premiumentry.png" title="'.$title.'" >' : '<div>'.$id.' '.$name.'</div>';
 		}
 	}
 	//If the entry is instead part of a paid channel, display an icon over the thumbnail to indicate this
@@ -139,7 +139,7 @@ foreach ($results->objects as $result) {
 					if($metadataProfile->name == 'PayPal (Categories)') {
 						$xml = simplexml_load_string($metaResult->xml);
 						if($xml->Paid == 'true')
-							$display =  $result->thumbnailUrl ? '<img width="120" height="68" id="thumb'.$count.'" style="background:url('.$result->thumbnailUrl.')" src="client/dollarsign.png" title="'.$title.'" >' : '<div>'.$id.' '.$name.'</div>';
+							$display =  $result->thumbnailUrl ? '<img width="120" height="68" id="thumb'.$count.'" style="background:url('.$result->thumbnailUrl.')" src="client/premiumentry.png" title="'.$title.'" >' : '<div>'.$id.' '.$name.'</div>';
 					}
 				}
 			}

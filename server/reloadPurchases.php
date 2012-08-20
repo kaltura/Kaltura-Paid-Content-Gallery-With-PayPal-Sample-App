@@ -26,64 +26,57 @@ if(count($results) == 0)
 else {
 	$result = $results[0];
 	$xml = simplexml_load_string($result->xml);
-	$count = 0;
-	$i = 0;
 	$response = array();
 	$response[0] = '<div class="purchaseTitles">Videos: </div>';
 	$response[1] = '<div class="purchaseTitles">Channels: </div>';
-	foreach($xml as $field => $value) {
-		if($field == "PurchasedCategories") {
-			$count = 0;
-			$i = 1;
+	$entries = $xml->PurchasedEntries;
+	$count = 0;
+	for($j = count($entries) - 1; $j >= 0 && $count < 3; --$j) {
+		if($entries[$j] != "") {
+			$value = $client->media->get($entries[$j]);
+			$categoryNames = explode(',', $value->categories);
+			$title = $value->name."\n"."Belongs to channel(s): ";
+			foreach($categoryNames as $categoryName)
+				$title .= $categoryName.', ';
+			$title = substr($title, 0, -2);
+			$display =  '<img width="92" height="56" src="'.$value->thumbnailUrl.'" title="'.$title.'" >';
+			$cats = $value->categoriesIds;
+			$thumbnail = '<a class="thumblink" rel="'.$value->id.'" cats="'.$value->categoriesIds.'" style="margin-right: 8px;">'.$display.'</a>';
+			$response[0] .= $thumbnail;
+			++$count;
 		}
-		if($count < 3) {
-			$value = (string) $value;
-			if($i == 0) {
-				if($value != "") {
-					$value = $client->media->get($value);
-					$categoryNames = explode(',', $value->categories);
-					$title = $value->name."\n"."Belongs to channel(s): ";
-					foreach($categoryNames as $categoryName)
-						$title .= $categoryName.', ';
-					$title = substr($title, 0, -2);
-					$display =  '<img width="92" height="56" src="'.$value->thumbnailUrl.'" title="'.$title.'" >';
-					$cats = $value->categoriesIds;
-					$thumbnail = '<a class="thumblink" rel="'.$value->id.'" cats="'.$value->categoriesIds.'" style="margin-right: 8px;">'.$display.'</a>';
-					$response[0] .= $thumbnail;
-					++$count;
-				}
+	}
+	$categories = $xml->PurchasedCategories;
+	$count = 0;
+	for($j = count($categories) - 1; $j >= 0 && $count < 3; --$j) {
+		if($categories[$j] != "") {
+			$value = $client->category->get($categories[$j]);
+			$filter = new KalturaMediaEntryFilter();
+			$filter->orderBy = "-createdAt";
+			$filter->categoriesIdsMatchAnd = $value->id;
+			$pager = new KalturaFilterPager();
+			$pager->pageSize = 6;
+			$pager->pageIndex = 1;
+			$entries = $client->media->listAction($filter, $pager)->objects;
+			$amount = 0;
+			$link = "";
+			$link .= '<div id="'.$value->id.'" class="categories" style="margin-right: 8px" title="'.$value->name.'">';
+			$link .= '<div class="category">';
+			foreach($entries as $categoryEntry) {
+				$entry = $client->media->get($categoryEntry->id);
+				$name = $entry->name;
+				$display =  '<img width="30" height="17" src="'.$entry->thumbnailUrl.'">';
+				$link .= $display;
+				++$amount;
+				if($amount == 3)
+					$link .= '<div class="clearCategory"></div>';
 			}
-			else {
-				if($value != "") {
-					$value = $client->category->get($value);
-					$filter = new KalturaMediaEntryFilter();
-					$filter->orderBy = "-createdAt";
-					$filter->categoriesIdsMatchAnd = $value->id;
-					$pager = new KalturaFilterPager();
-					$pager->pageSize = 6;
-					$pager->pageIndex = 1;
-					$entries = $client->media->listAction($filter, $pager)->objects;
-					$amount = 0;
-					$link = "";
-					$link .= '<div id="'.$value->id.'" class="categories" style="margin-right: 8px" title="'.$value->name.'">';
-					$link .= '<div class="category">';
-					foreach($entries as $categoryEntry) {
-						$entry = $client->media->get($categoryEntry->id);
-						$name = $entry->name;
-						$display =  '<img width="30" height="17" src="'.$entry->thumbnailUrl.'">';
-						$link .= $display;
-						++$count;
-						if($count == 3)
-							$link .= '<div class="clearCategory"></div>';
-					}
-					$link .= '</div>';
-					$link .= '<div class="categoryName">'.$value->name.'</div>';
-					$link .= '</div>';
-					$categoryLink = '<a class="categoryLink" rel="'.$value->id.'">'.$link.'</a>';
-					$response[1] .= $categoryLink;
-					++$count;
-				}
-			}
+			$link .= '</div>';
+			$link .= '<div class="categoryName">'.$value->name.'</div>';
+			$link .= '</div>';
+			$categoryLink = '<a class="categoryLink" rel="'.$value->id.'">'.$link.'</a>';
+			$response[1] .= $categoryLink;
+			++$count;
 		}
 	}
 	if(strcmp($response[0], '<div class="purchaseTitles">Videos: </div>') == 0)

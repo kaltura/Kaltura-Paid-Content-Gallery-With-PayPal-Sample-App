@@ -73,7 +73,7 @@ foreach($categories->objects as $category) {
 	$link .= '</div>';
 	$link .= '<div class="categoryName">'.$category->name.'</div>';
 	if($paidCategory)
-		$link .= '<img class="channelSigns" src="client/channeldollarsign.png">';
+		$link .= '<img class="channelSigns" src="client/premiumchannel.png">';
 	$link .= '</div>';
 	++$categoryCount;
 	$categoryLink = "<a class='categoryLink' rel='{$category->id}'>{$link}</a>";

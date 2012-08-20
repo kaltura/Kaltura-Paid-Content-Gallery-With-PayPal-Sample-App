@@ -138,6 +138,7 @@ foreach ($results->objects as $result) {
 						$xml = simplexml_load_string($metaResult->xml);
 						if($xml->Paid == 'true')
 							$display =  $result->thumbnailUrl ? "<img width='120' height='68' id='thumb$count' style='background:url(".$result->thumbnailUrl.")' src='lib/dollarsign.png' title='$name' >" : "<div>".$id." ".$name."</div>";
+						break 2;
 					}
 				}
 			}

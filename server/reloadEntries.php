@@ -147,8 +147,10 @@ foreach ($results->objects as $result) {
 	}
 	if($display == "")
 		$display =  $result->thumbnailUrl ? '<img width="120" height="68" id="thumb'.$count.'" src="'.$result->thumbnailUrl.'" title="'.$title.'" >' : '<div>'.$id.' '.$name.'</div>';
+	$display .= '<img src="client/play.png" id="play">';
 	$cats = $result->categoriesIds;
-	$thumbnail = "<a class='thumblink' rel='{$result->id}' cats='$cats' >{$display}</a>";	echo '<div class="float1">';
+	$thumbnail = '<a class="thumblink" rel="'.$result->id.'" cats="'.$cats.'" title="'.$title.'" >'.$display.'</a>';
+	echo '<div class="float1">';
 		echo $thumbnail.'   ';
 	echo '</div>';
 	echo '<div class="space"></div>';

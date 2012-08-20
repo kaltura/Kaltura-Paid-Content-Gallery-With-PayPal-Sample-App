@@ -49,7 +49,9 @@ require_once('server/kalturaConfig.php');
 			}
 			else {
 				$('#failConfig').hide();
-				showPurchases();
+				//When the pager loads, show a preview of the user's purchases
+				//This feature has been removed for the demo but simply uncommenting the line below will renable it
+				//showPurchases();
 				//When the page loads, show the available channels
 				showCategories(1);
 				//When the page loads, show the entries
@@ -183,9 +185,9 @@ require_once('server/kalturaConfig.php');
 					$('#purchaseWindow').hide();
 					$('#purchaseWindow').html('');
 					if(entryId != 0)
-						entryId.css('opacity', '1');
+						entryId.children('#play').hide();
 					entryId = $(this);
-					$(this).css('opacity', '0.50');
+					entryId.children('#play').show();
 					currentEntry = $(this).attr('rel');
 					checkAccess($(this).attr('rel'), $(this).attr('cats'));
 					window.scrollTo(0,document.body.scrollHeight);
@@ -193,7 +195,7 @@ require_once('server/kalturaConfig.php');
 			    //Loads a video the first time the page loads
 			    if(firstload) {
 					entryId = $('#entryList').find('.thumblink:first');
-					entryId.css('opacity', '0.50');
+					entryId.children('#play').show();
 					currentEntry = entryId.attr('rel');
 					checkAccess(entryId.attr('rel'), entryId.attr('cats'));
 					firstload = false;
@@ -215,9 +217,9 @@ require_once('server/kalturaConfig.php');
 				$('.categoryLink').click(function() {
 					$('#searchBar').val('');
 					if(categoryId != 0)
-						categoryId.css('borderColor', 'black');
+						categoryId.children('.categoryName').css('background', 'white');
 					categoryId = $(this).children();
-					$(this).children().css('borderColor', 'blue');
+					$(this).children().children('.categoryName').css('background', '#FFF500');
 					currentCategory = $(this).attr('rel');
 					$('#searchText').text('Search "' + $(this).children().attr('title') + '" by name, description, or tags: ');
 					showEntries(1, currentSearch, currentCategory);
@@ -291,9 +293,8 @@ require_once('server/kalturaConfig.php');
 				data: {all: 'false'}
 			}).done(function(msg) {
 				if(msg == 0)
-					$('#welcomeMessage').html('Welcome <?php echo $USER_ID; ?>, you have not purchased anything yet.');
+					break;
 				else {
-					$('#welcomeMessage').html('Welcome <?php echo $USER_ID; ?>, you have previously bought the following items (see the <a href="javascript:showAllPurchases()">full list</a>):');
 					var response = JSON && JSON.parse(msg) || $.parseJSON(msg);
 					$('#userVideos').html(response[0]);
 					$('#userChannels').html(response[1]);
@@ -314,7 +315,6 @@ require_once('server/kalturaConfig.php');
 		}
 
 		function showAllPurchases() {
-			window.scrollTo(0,document.body.scrollHeight);
 			$.colorbox({width:"50%", href:"server/userPurchases.php?all=true"});
 		}
 
@@ -355,17 +355,20 @@ require_once('server/kalturaConfig.php');
 		<div id="failConfig" class="notep">NOTE: Make sure to generate a configuration file using the PayPal Account Wizard.</div>
 		<div><img src="client/loadBar.gif" style="display: none;" id="loadBar"></div>
 		<h1>Kaltura Paid-Content Gallery Sample App</h1>
-		<div class="notep"><strong>This application is using a Sandbox PayPal demo account.</strong> All pay-videos are set with a 10sec free preview.<br/>To purchase, use the following credentials - user: <span class="italicbold">john_1344640136_per@kaltura.com</span> &nbsp; pass: <span class="italicbold">kaltura2012</span></div>
 		<div id="userDiv">
-			<div id="welcomeMessage">Welcome <?php echo $USER_ID; ?></div>
+			<div id="welcomeMessage">Welcome <?php echo $USER_ID; ?>,
+				<ul style="margin: 0;">
+					<li>
+						<a href="javascript:showAllPurchases()">Click here to see your purchased videos and channels</a>
+					</li>
+					<li>
+						<a href="javascript:window.scrollTo(0,document.body.scrollHeight)">Read an important note about this demo</a>
+					</li>
+				</ul>
+			</div>
 			<div id="userVideos" style="float: left;"></div>
 			<div id="userChannels"></div>
 			<div id="viewPurchases"></div>
-		</div>
-		<div class="searchDiv">
-			<span id="searchText">Search all channels by name, description, or tags: </span><input type="text" id="searchBar" autofocus="autofocus">
-			<button id="searchButton" class="searchButtonClass" type="button" onclick="showEntries()">Search</button>
-			<button id="showButton" type="button" onclick="showEntries(1, '', '')">Show All</button>
 		</div>
 	</div>
 	<div class="capsule">
@@ -373,12 +376,30 @@ require_once('server/kalturaConfig.php');
 		<div id="channels">
 			<h2 style="margin-top: 0px;">Channels</h2>
 			<div id="categoryList"></div>
-		</div>	
+		</div>
+		<div class="searchDiv">
+			<span id="searchText">Search all channels by name, description, or tags: </span><input type="text" id="searchBar" autofocus="autofocus">
+			<button id="searchButton" class="searchButtonClass" type="button" onclick="showEntries()">Search</button>
+			<button id="showButton" type="button" onclick="showEntries(1, '', '')">Show All</button>
+		</div>
 		<div id="entryList"></div>
 		<div id="playerDivContainer"><div id="playerDiv"></div></div>
 		<div id="clearDiv" style="clear:both"></div>
 		<div id="adminDiv">
 			<button id="adminButton" type="button" onclick="location.href='AccountWizard'" style="margin-bottom: 11px; margin-left: -2px;">Admin Account Wizard</button>
+		</div>
+		<div class="notep">
+			<ul style="margin: 0;">
+				<li>
+					<strong>This application is using a Sandbox PayPal demo account.</strong> All pay-videos are set with a 10sec free preview.
+				</li>
+				<li>
+					To purchase, use the following credentials - user: <span class="italicbold">john_1344640136_per@kaltura.com</span> &nbsp; pass: <span class="italicbold">kaltura2012</span>
+				</li>
+				<li>
+					For the purposes of the demo, this application creates new users based on their IP address. In a production environment it is encouraged to create an actual user registration system.
+				</li>
+			</ul>
 		</div>
 	</div>
 	<div id="purchaseWindow"></div>

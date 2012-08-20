@@ -11,7 +11,16 @@ body, html {
 }
 
 div.notep {
-	font-size: 14px; background: #cccfff url(note_icons.png) no-repeat left center; padding-left: 80px; min-height: 56px; display: block; padding-top: 5px; margin-top: 15px; margin-bottom: 15px;
+	color: #666560;
+	background: url("note.png") no-repeat scroll left top #F2F4D5;
+	display: block;
+	font-size: 14px;
+	margin: 15px 0px;
+	min-height: 40px;
+	padding: 5px 0px 0px 70px;
+	/*
+		font-size: 14px; background: #cccfff url(note_icons.png) no-repeat left center; padding-left: 80px; min-height: 56px; display: block; padding-top: 5px; margin-top: 15px; margin-bottom: 15px;
+	*/
 }
 
 div.pagerDiv {
@@ -115,6 +124,7 @@ div.categoryName {
 	text-align: center;
 	white-space:nowrap;
     overflow:hidden;
+    line-height: 20px;
 }
 
 div.clearCategory {
@@ -145,7 +155,7 @@ div.clearCategory {
 
 .channelSigns {
 	position: absolute;
-	margin-top: -59px;
+	margin-top: -55px;
 }
 
 #userDiv {
@@ -180,4 +190,11 @@ div.userCategories {
 div.userCategory {
 	line-height: 0px;
 	height: 46px;
+}
+
+#play {
+	position: absolute;
+	margin-left: -85px;
+	margin-top: 9px;
+	display: none;
 }

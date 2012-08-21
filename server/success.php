@@ -38,10 +38,14 @@
 		
 		function forceCloseFlow() {
 			//The page you want to redirect the user after successfully storing data in local storage.
-			window.location.href = '../../index.html';
+			//window.location.href = '../../index.html';
+			
+			// This case is for iPhone - we're closing the purchase window to go back to the main gallery
+			window.close();
 		}
 	</script>
 </head>
 <body onload="closeFlow(false)">
+	<h1>Thank You for purchasing at our store!</h1>
 </body>
 </html>

@@ -14,7 +14,8 @@ require_once('server/kalturaConfig.php');
 	<script src="https://www.paypalobjects.com/js/external/dg.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script src="client/pptransact.js"></script>
-	<script src="http://html5.kaltura.org/js"></script>
+	<!-- <script src="http://html5.kaltura.org/js"></script> -->
+	<script src="http://html5video.org/kgit/tags/v1.7.0.rc1/mwEmbedLoader.php"></script>
 	<script type="text/javascript" src="client/loadmask/jquery.loadmask.min.js"></script>
 	<script src="client/colorbox/colorbox/jquery.colorbox.js"></script>
 	<!-- Page Scripts -->
@@ -62,9 +63,6 @@ require_once('server/kalturaConfig.php');
 				});
 			}
 		});
-
-		//Uncomment this line to use the HTML5 player instead
-		//mw.setConfig('KalturaSupport.LeadWithHTML5', true);
 		
 		//INITIALIZE SESSION WITH APPROPRIATE LANGUAGE
 		pptransact.init('php',false);
@@ -129,6 +127,13 @@ require_once('server/kalturaConfig.php');
 		
 		// Loads the video is a Kaltura Dynamic Player
 		function loadVideo(ks,uiConfId,entryId) {
+			flashvars = {};
+			flashvars.externalInterfaceDisabled = false;
+			flashvars.autoplay = true;
+			flashvars.disableAlerts = true;
+			flashvars.entryId = entryId;
+			if(ks != "")
+				flashvars.ks = ks;
 			kWidget.embed({
 				'targetId': 'playerDiv',
 				'wid': '_<?php echo PARTNER_ID; ?>',
@@ -136,13 +141,7 @@ require_once('server/kalturaConfig.php');
 				'entry_id' : entryId,
 				'width': 400,
 				'height': 300,
-				'flashvars':{
-					'externalInterfaceDisabled' : false,
-					'autoPlay' : true,
-					'disableAlerts': true,
-					'entryId': entryId,
-					'ks': ks
-				},
+				'flashvars': flashvars,
 				'readyCallback': function( playerId ){
 					window.kdp = $('#'+playerId).get(0);
 					kdp.addJsListener("freePreviewEnd", 'freePreviewEndHandler');

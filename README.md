@@ -44,8 +44,9 @@ to false so that the gallery knows to use your free content player. In addition 
 profile you have deemed as the Default in your KMC). When you're done giving prices to your content, click done and you will return to the main menu.
 * Finally, now that your account has been fully setup to work with PayPal's libraries, you may generate a config file. As mentioned above, this will
 automatically place the file in the correct directory and will contain all the information required to run your video gallery.
-* In this particular sample, when the user buys a video using their PayPal account, the video is purchased for their machine name and their
-IP address. Therefore as long as they use the same machine on that IP address, they will continue to have access to the content.
+* In this particular sample, the user ID is randomly generated when the user first visits the gallery based on their IP address and this username
+is stored as a cookie. Therefore as long as the user does not clear their browser cookies they get to keep all their purchases. In a production
+environment it is encouraged to implement an actual user registration system.
 
 Pricing Architecture
 --------------------

@@ -54,15 +54,13 @@
 				$('#purchaseWindow').html('');
 				if(entryId != 0)
 					entryId.children('#play').hide();
-				entryId = $(this);
-				entryId.children('#play').show();
 				currentEntry = $(this).attr('rel');
 				checkAccess(currentEntry, $(this).attr('cats'));
 				var arr = $('.entriesDiv').children().children('.thumblink');
 				for(var i = 0; i < arr.length; ++i) {
 					if($(arr[i]).attr('rel') == currentEntry) {
 						entryId = $(arr[i]);
-						entryId.children('#play').hide();
+						entryId.children('#play').css('display', 'block');
 						break;
 					}
 				}

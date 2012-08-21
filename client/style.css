@@ -193,10 +193,10 @@ div.userCategory {
 }
 
 #play {
-	position: absolute;
-	margin-left: -85px;
-	margin-top: 9px;
+	position: relative;
 	display: none;
+	margin-top: -65px;
+	margin-left: 33px;
 }
 
 .userid {

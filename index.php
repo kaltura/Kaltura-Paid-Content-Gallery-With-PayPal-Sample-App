@@ -192,7 +192,7 @@ require_once('server/kalturaConfig.php');
 					if(entryId != 0)
 						entryId.children('#play').hide();
 					entryId = $(this);
-					entryId.children('#play').show();
+					entryId.children('#play').css('display', 'block');
 					currentEntry = $(this).attr('rel');
 					checkAccess($(this).attr('rel'), $(this).attr('cats'));
 					window.scrollTo(0,document.body.scrollHeight);
@@ -200,7 +200,7 @@ require_once('server/kalturaConfig.php');
 			    //Loads a video the first time the page loads
 			    if(firstload) {
 					entryId = $('#entryList').find('.thumblink:first');
-					entryId.children('#play').show();
+					entryId.children('#play').css('display', 'block');
 					currentEntry = entryId.attr('rel');
 					checkAccess(entryId.attr('rel'), entryId.attr('cats'));
 					firstload = false;

@@ -127,26 +127,32 @@ require_once('server/kalturaConfig.php');
 		
 		// Loads the video is a Kaltura Dynamic Player
 		function loadVideo(ks,uiConfId,entryId) {
-			flashvars = {};
-			flashvars.externalInterfaceDisabled = false;
-			flashvars.autoplay = true;
-			flashvars.disableAlerts = true;
-			flashvars.entryId = entryId;
-			if(ks != "")
-				flashvars.ks = ks;
-			kWidget.embed({
-				'targetId': 'playerDiv',
-				'wid': '_<?php echo PARTNER_ID; ?>',
-				'uiconf_id' : uiConfId,
-				'entry_id' : entryId,
-				'width': 400,
-				'height': 300,
-				'flashvars': flashvars,
-				'readyCallback': function( playerId ){
-					window.kdp = $('#'+playerId).get(0);
-					kdp.addJsListener("freePreviewEnd", 'freePreviewEndHandler');
-				}
-			});
+		        if (window.kdp) {
+		                kWidget.destroy(window.kdp);
+		                delete(window.kdp);
+		        }
+		        var uniqid = +new Date();
+		        var kdpId = 'kdptarget'+uniqid;
+		        $('#playerDiv').html('<div id="'+kdpId+'" ></div>');
+		        flashvars = {};
+		        flashvars.externalInterfaceDisabled = false;
+		        flashvars.autoplay = true;
+		        flashvars.disableAlerts = true;
+		        flashvars.entryId = entryId;
+		        if(ks != "") flashvars.ks = ks;
+		        kWidget.embed({
+		                'targetId': kdpId,
+		                'wid': '_<?php echo PARTNER_ID; ?>',
+		                'uiconf_id' : uiConfId,
+		                'entry_id' : entryId,
+		                'width': 400,
+		                'height': 300,
+		                'flashvars': flashvars,
+		                'readyCallback': function( playerId ){
+		                        window.kdp = $('#'+playerId).get(0);
+		                        kdp.addJsListener("freePreviewEnd", 'freePreviewEndHandler');
+		                }
+		        });
 		}
 
 		//Responds to the page number index that is clicked

@@ -42,6 +42,7 @@ require_once('server/kalturaConfig.php');
 						else
 							echo 0;
 					?>) {
+				$('#failConfig').show();
 				$('#searchButton').attr('disabled', 'disabled');
 				$('#showButton').attr('disabled', 'disabled');
 				$('#searchBar').attr('disabled', 'disabled');
@@ -49,7 +50,6 @@ require_once('server/kalturaConfig.php');
 				$('#channels').hide();
 			}
 			else {
-				$('#failConfig').hide();
 				//When the pager loads, show a preview of the user's purchases
 				//This feature has been removed for the demo but simply uncommenting the line below will renable it
 				//showPurchases();
@@ -355,7 +355,7 @@ require_once('server/kalturaConfig.php');
 </head>
 <body>
 	<div id="wrapper">
-		<div id="failConfig" class="notep">NOTE: Make sure to generate a configuration file using the PayPal Account Wizard.</div>
+		<div id="failConfig" class="notep" style="display: none">NOTE: Make sure to generate a configuration file using the PayPal Account Wizard.</div>
 		<div><img src="client/loadBar.gif" style="display: none;" id="loadBar"></div>
 		<h1>Kaltura Paid-Content Gallery Sample App</h1>
 		<div id="userDiv">

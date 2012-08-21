@@ -24,7 +24,13 @@
 			if(!parentExists()) {
 				var jsonData = $.parseJSON('<?= $returnObj ?>');
 				pptransact.saveToLocalStorage(jsonData.userId,<?= $returnObj ?>,null);
-				setTimeout ( forceCloseFlow, '3000' );
+				$.ajax({
+					type: "POST",
+					url: "savePurchase.php",
+					data: {id: "<?php echo $data[2]; ?>"}
+				}).done(function(msg) {
+					setTimeout ( forceCloseFlow, '3000' );
+				});
 			} else {
 				parent.pptransact.releaseDG(<?= $returnObj ?>);
 			}

@@ -14,12 +14,17 @@ require_once('server/kalturaConfig.php');
 	<script src="https://www.paypalobjects.com/js/external/dg.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script src="client/pptransact.js"></script>
-	<script src="http://html5.kaltura.org/js"></script>
+	<!-- script src="http://html5.kaltura.org/js"></script-->
+	<script src="http://cdnbakmi.kaltura.com/html5/html5lib/v1.6.12.40/mwEmbedLoader.php"></script>
 	<!-- <script src="http://html5video.org/kgit/tags/v1.7.0.rc1/mwEmbedLoader.php"></script> -->
 	<script type="text/javascript" src="client/loadmask/jquery.loadmask.min.js"></script>
 	<script src="client/colorbox/colorbox/jquery.colorbox.js"></script>
 	<!-- Page Scripts -->
 	<script>
+		//Access Controled HLS playback is not yet available, check with your Kaltura Account Manager
+		//this will make the playback in iOS use Progressive Download.
+		mw.setConfig('Kaltura.UseAppleAdaptive', false);
+		
 		//are we loading the page or just calling ajax triggered by user interaction?
 		var firstload = true;
 		//Keeps track of the page being viewed

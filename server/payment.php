@@ -35,7 +35,7 @@ foreach($metaResults as $metaResult) {
 echo '<div>';
 if($price != 0) {
 	echo 'This is a paid item. You can purchase access to watch it:';
-	echo '<button id="buyNowButton" type="button" onclick="bill('."'".$_REQUEST['entryId']."'".')">Buy Now</button>';
+	echo '<button id="buyNowButton" class="buyButton" type="button" onclick="bill('."'".$_REQUEST['entryId']."'".')">Buy Now</button>';
 	echo ' for '.$currencyCode.' '.number_format($price * (1 + .01 * $tax), 2);
 }
 echo '</div>';
@@ -57,7 +57,7 @@ if($categoryList != '') {
 					$tax = (float) $xml->TaxPercent;
 					echo 'You can '.$also.'watch this entry and more on:';
 					echo '<h2>'.$client->category->get(trim($category))->name.'</h2>';
-					echo '<button id="buyCategoryButton" type="button" onclick="bill('."'".trim($category)."'".')">Subscribe to this channel</button>';
+					echo '<button id="buyCategoryButton" class="buyButton" type="button" onclick="bill('."'".trim($category)."'".')">Subscribe to this channel</button>';
 					echo ' for '.$currencyCode.' '.number_format($price * (1 + .01 * $tax), 2);
 
 				}			

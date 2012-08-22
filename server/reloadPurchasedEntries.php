@@ -47,11 +47,14 @@ $metaFilter->objectIdEqual = $USER_ID;
 $metaPager = new KalturaFilterPager();
 $metaPager->pageSize = 1;
 $metaPager->pageIndex = 1;
-$result = $client->metadata->listAction($metaFilter, $metaPager)->objects[0];
-$xml = simplexml_load_string($result->xml);
-foreach($xml->PurchasedEntries as $field => $value) {
-	if($value != "")
-		$entryIdin .= $value.',';
+$results = $client->metadata->listAction($metaFilter, $metaPager)->objects;
+if(count($results) > 0) {
+	$result = $results[0];
+	$xml = simplexml_load_string($result->xml);
+	foreach($xml->PurchasedEntries as $field => $value) {
+		if($value != "")
+			$entryIdin .= $value.',';
+	}
 }
 if($entryIdin == "")
 	$entryIdin = "0";

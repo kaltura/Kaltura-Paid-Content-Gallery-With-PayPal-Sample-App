@@ -166,6 +166,10 @@ div.clearCategory {
 	cursor: pointer;
 }
 
+.userthumblink {
+	cursor: pointer;
+}
+
 .purchaseTitles {
 	float: left;
 	margin-right: 8px;

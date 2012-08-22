@@ -44,11 +44,14 @@ $metaFilter->objectIdEqual = $USER_ID;
 $metaPager = new KalturaFilterPager();
 $metaPager->pageSize = 1;
 $metaPager->pageIndex = 1;
-$result = $client->metadata->listAction($metaFilter, $metaPager)->objects[0];
-$xml = simplexml_load_string($result->xml);
-foreach($xml as $field => $value) {
-	if($value != "")
-		$categoryIdin .= $value.',';
+$results = $client->metadata->listAction($metaFilter, $metaPager)->objects;
+if(count($results) > 0) {
+	$result = $results[0];
+	$xml = simplexml_load_string($result->xml);
+	foreach($xml as $field => $value) {
+		if($value != "")
+			$categoryIdin .= $value.',';
+	}
 }
 if($categoryIdin == "")
 	$categoryIdin = "0";
@@ -59,6 +62,8 @@ $pager->pageSize = $pageSize;
 $pager->pageIndex = $page;
 $categories = $client->category->listAction($filter, $pager);
 $count = $categories->totalCount;
+if($count > 0 && count($categories->objects) == 0)
+	$count = 0;
 
 //This function creates a set of links to other category pages
 function create_gallery_pager  ($pageNumber, $current_page, $pageSize, $count, $js_callback_paging_clicked) {

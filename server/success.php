@@ -46,6 +46,5 @@
 	</script>
 </head>
 <body onload="closeFlow(false)">
-	<h1>Thank You for purchasing at our store!</h1>
 </body>
 </html>

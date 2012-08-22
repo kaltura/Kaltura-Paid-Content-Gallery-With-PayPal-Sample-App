@@ -13,7 +13,7 @@ $client->setKs($_REQUEST['session']);
 
 //These headers allow the AJAX download to occur
 header("Content-Type: application/octet-stream; charset=UTF-8");
-header("Content-Disposition: inline; filename=\"kalturaConfig.php\"");
+header("Content-Disposition: inline; filename=\"kalturaConfig.php.backup\"");
 header("Set-Cookie: fileDownload=true; path=/");
 echo "<?php \n";
 //Retrieves the entry metadata profile

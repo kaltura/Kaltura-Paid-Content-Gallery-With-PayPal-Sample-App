@@ -359,6 +359,7 @@ require_once('server/kalturaConfig.php');
 	</script>
 </head>
 <body>
+	<a target="_blank" href="https://github.com/kaltura/Kaltura-Paid-Content-Gallery-With-PayPal-Sample-App"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
 	<div id="wrapper">
 		<div id="failConfig" class="notep" style="display: none">NOTE: Make sure to generate a configuration file using the PayPal Account Wizard.</div>
 		<div><img src="client/loadBar.gif" style="display: none;" id="loadBar"></div>

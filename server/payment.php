@@ -7,6 +7,7 @@ require_once("kalturaConfig.php");
 require_once('client/KalturaClient.php');
 $config = new KalturaConfiguration(PARTNER_ID);
 $config->serviceUrl = 'http://www.kaltura.com/';
+$config->format = KalturaClientBase::KALTURA_SERVICE_FORMAT_PHP;
 $client = new KalturaClient($config);
 global $USER_ID;
 $ks = $client->generateSession(ADMIN_SECRET, $USER_ID, KalturaSessionType::ADMIN, PARTNER_ID);
@@ -24,13 +25,14 @@ $tax = 0;
 $also = "";
 //Checks to see if the individual video has a price and displays it
 foreach($metaResults as $metaResult) {
-	if($client->metadataProfile->get($metaResult->metadataProfileId)->name == 'PayPal (Entries)')
+	if($client->metadataProfile->get($metaResult->metadataProfileId)->name == 'PayPal (Entries)') {
 		$xml = simplexml_load_string($metaResult->xml);
 		$price = (float) $xml->Price;
 		$currencyCode = (string) $xml->CurrencyCode;
 		$tax = (float) $xml->TaxPercent;
 		$also = 'also ';
 		break;
+	}
 }
 echo '<div>';
 if($price != 0) {

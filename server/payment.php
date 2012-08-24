@@ -30,7 +30,7 @@ $filter->metadataProfileIdEqual = PAYPAL_CATEGORY_METADATA_PROFILE_ID; //return 
 $pager = new KalturaFilterPager();
 $pager->pageSize = 500;
 $pager->pageIndex = 1;
-$client->metadata->listAction($filter, $pager)->objects;
+$client->metadata->listAction($filter, $pager);
 $multiRequest = $client->doMultiRequest(); //Call the server with the bundeled requests
 
 $metaResults = $multiRequest[1]; //get result of response #2 (payment metadata of the given entry)

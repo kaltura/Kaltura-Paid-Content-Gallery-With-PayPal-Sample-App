@@ -13,10 +13,27 @@ global $USER_ID;
 $ks = $client->generateSession(ADMIN_SECRET, $USER_ID, KalturaSessionType::ADMIN, PARTNER_ID);
 $client->setKs($ks);
 
+//To optimize, we use multi-request to bundle the 3 API requests together in one call to the server:
+$client->startMultiRequest();
+//Request #1: get the entry details
+$client->media->get($_REQUEST['entryId']);
+//Request #2: get the entry's payment metadata
 $filter = new KalturaMetadataFilter();
 $filter->objectIdEqual = $_REQUEST['entryId']; //return only metadata for this entry
 $filter->metadataProfileIdEqual = PAYPAL_METADATA_PROFILE_ID; //return only the relevant profile
-$metaResults = $client->metadata->listAction($filter); //since we're limiting to entry id and profile this will return at most 1 result
+$client->metadata->listAction($filter); //since we're limiting to entry id and profile this will return at most 1 result
+//Request #3: get the entry's payment metadata
+$filter = new KalturaMetadataFilter();
+$filter->metadataObjectTypeEqual = KalturaMetadataObjectType::CATEGORY; //search for all category metadatas
+$filter->objectIdIn = '{1:result:categoriesIds}'; //return metadata for all categories of the given entry (categories taken from result of request #1)
+$filter->metadataProfileIdEqual = PAYPAL_CATEGORY_METADATA_PROFILE_ID; //return only the relevant profile
+$pager = new KalturaFilterPager();
+$pager->pageSize = 500;
+$pager->pageIndex = 1;
+$client->metadata->listAction($filter, $pager)->objects;
+$multiRequest = $client->doMultiRequest(); //Call the server with the bundeled requests
+
+$metaResults = $multiRequest[1]; //get result of response #2 (payment metadata of the given entry)
 $price = 0;
 $currencyCode = 'USD';
 $tax = 0;
@@ -38,19 +55,12 @@ if($price != 0) {
 }
 echo '</div>';
 //Checks to see if the video belongs to a channel and gives the user the option to buy that instead
-$categoryList = $client->media->get($_REQUEST['entryId'])->categoriesIds; //get all the categories this entry is in
+$categoryList = $multiRequest[0]->categoriesIds;  //get result of response #1 (entry.get)
+$categories = explode(',', $categoryList);
+$metaResults = $multiRequest[2];  //get result of response #3 (metadatas of all categories of the given entry)
 if($categoryList != '') {
-	$filter = new KalturaMetadataFilter();
-	$filter->metadataObjectTypeEqual = KalturaMetadataObjectType::CATEGORY; //search for all category metadatas
-	$filter->objectIdIn = trim($categoryList); //return metadata for all categories of the given entry
-	$filter->metadataProfileIdEqual = PAYPAL_CATEGORY_METADATA_PROFILE_ID; //return only the relevant profile
-	$pager = new KalturaFilterPager();
-	$pager->pageSize = 500;
-	$pager->pageIndex = 1;
-	$metaResults = $client->metadata->listAction($filter, $pager)->objects;
-	$categories = explode(',', $categoryList);
 	foreach($categories as $category) {
-		foreach($metaResults as $metaResult) {
+		foreach($metaResults->objects as $metaResult) {
 			if ($category == $metaResult->objectId) { //if we found the category has payment metadata:
 				$xml = simplexml_load_string($metaResult->xml);
 				if($xml->Paid == 'true') {

@@ -7,6 +7,7 @@ require_once("kalturaConfig.php");
 require_once('client/KalturaClient.php');
 $config = new KalturaConfiguration(PARTNER_ID);
 $config->serviceUrl = 'http://www.kaltura.com/';
+$config->format = KalturaClientBase::KALTURA_SERVICE_FORMAT_PHP;
 $client = new KalturaClient($config);
 global $USER_ID;
 $ks = $client->generateSession(ADMIN_SECRET, $USER_ID, KalturaSessionType::ADMIN, PARTNER_ID);

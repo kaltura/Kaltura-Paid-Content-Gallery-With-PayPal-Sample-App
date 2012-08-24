@@ -13,24 +13,21 @@ $ks = $client->generateSession(ADMIN_SECRET, $USER_ID, KalturaSessionType::ADMIN
 $client->setKs($ks);
 
 $filter = new KalturaMetadataFilter();
-$filter->objectIdEqual = $_REQUEST['entryId'];
-$pager = new KalturaFilterPager();
-$pager->pageSize = 500;
-$pager->pageIndex = 1;
-$metaResults = $client->metadata->listAction($filter, $pager)->objects;
+$filter->objectIdEqual = $_REQUEST['entryId']; //return only metadata for this entry
+$filter->metadataProfileIdEqual = PAYPAL_METADATA_PROFILE_ID; //return only the relevant profile
+$metaResults = $client->metadata->listAction($filter); //since we're limiting to entry id and profile this will return at most 1 result
 $price = 0;
 $currencyCode = 'USD';
 $tax = 0;
 $also = "";
 //Checks to see if the individual video has a price and displays it
-foreach($metaResults as $metaResult) {
-	if($client->metadataProfile->get($metaResult->metadataProfileId)->name == 'PayPal (Entries)')
-		$xml = simplexml_load_string($metaResult->xml);
-		$price = (float) $xml->Price;
-		$currencyCode = (string) $xml->CurrencyCode;
-		$tax = (float) $xml->TaxPercent;
-		$also = 'also ';
-		break;
+if ($metaResults->totalCount > 0) {
+	$metaResult = $metaResults->objects[0];
+	$xml = simplexml_load_string($metaResult->xml);
+	$price = (float) $xml->Price;
+	$currencyCode = (string) $xml->CurrencyCode;
+	$tax = (float) $xml->TaxPercent;
+	$also = 'also ';
 }
 echo '<div>';
 if($price != 0) {
@@ -40,16 +37,20 @@ if($price != 0) {
 }
 echo '</div>';
 //Checks to see if the video belongs to a channel and gives the user the option to buy that instead
-$categoryList = $client->media->get($_REQUEST['entryId'])->categoriesIds;
+$categoryList = $client->media->get($_REQUEST['entryId'])->categoriesIds; //get all the categories this entry is in
 if($categoryList != '') {
+	$filter = new KalturaMetadataFilter();
+	$filter->metadataObjectTypeEqual = KalturaMetadataObjectType::CATEGORY; //search for all category metadatas
+	$filter->objectIdIn = trim($categoryList); //return metadata for all categories of the given entry
+	$filter->metadataProfileIdEqual = PAYPAL_CATEGORY_METADATA_PROFILE_ID; //return only the relevant profile
+	$pager = new KalturaFilterPager();
+	$pager->pageSize = 500;
+	$pager->pageIndex = 1;
+	$metaResults = $client->metadata->listAction($filter, $pager)->objects;
 	$categories = explode(',', $categoryList);
 	foreach($categories as $category) {
-		$filter = new KalturaMetadataFilter();
-		$filter->metadataObjectTypeEqual = KalturaMetadataObjectType::CATEGORY;
-		$filter->objectIdEqual = trim($category);
-		$metaResults = $client->metadata->listAction($filter, $pager)->objects;
 		foreach($metaResults as $metaResult) {
-			if($client->metadataProfile->get($metaResult->metadataProfileId)->name == 'PayPal (Categories)') {
+			if ($category == $metaResult->objectId) { //if we found the category has payment metadata:
 				$xml = simplexml_load_string($metaResult->xml);
 				if($xml->Paid == 'true') {
 					$price = (float) $xml->Price;
@@ -59,8 +60,7 @@ if($categoryList != '') {
 					echo '<h2>'.$client->category->get(trim($category))->name.'</h2>';
 					echo '<button id="buyCategoryButton" class="buyButton" type="button" onclick="bill('."'".trim($category)."'".')">Subscribe to this channel</button>';
 					echo ' for '.$currencyCode.' '.number_format($price * (1 + .01 * $tax), 2);
-
-				}			
+				}
 			}
 		}
 	}
